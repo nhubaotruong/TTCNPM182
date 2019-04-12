@@ -1,0 +1,23 @@
+.container {
+  width: 80%;
+}
+
+.brand-logo {
+  margin-left: 20px;
+}
+
+#search {
+  width: 300px;
+  background-color: white;
+  border-radius: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.right {
+  margin-right: 10px;
+}
+
+img {
+  height: 80px;
+}
