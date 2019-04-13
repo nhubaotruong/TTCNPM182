@@ -1,4 +1,4 @@
-﻿﻿# TTCNPM182
+# TTCNPM182
 
 1. npx create-react-app "tên"
 2. chép public và src vào thư mục project
