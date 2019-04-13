@@ -15,3 +15,5 @@ Từ thư mục project có chứa public, src và node_modules mở cmd chạy:
 Bắt đầu server:
 
 5. npm start //bắt đầu thực thi
+########################################
+Chú ý: Chúng ta cần cài nodejs trước khi thực hiện các bước trên.
