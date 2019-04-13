@@ -18,6 +18,9 @@
   margin-right: 10px;
 }
 
-img {
-  height: 80px;
+.tit {
+  font-weight: bold;
+  margin-left: 30px;
+  margin-top: 20px;
+  font-size: 20px;
 }
