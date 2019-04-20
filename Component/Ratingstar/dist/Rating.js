@@ -269,7 +269,7 @@ var ReactStars = function (_Component) {
   }]);
 
   return ReactStars;
-}(_react.Component);
+}(_react.Component); 
 
 ReactStars.propTypes = {
   className: _propTypes2.default.string,
