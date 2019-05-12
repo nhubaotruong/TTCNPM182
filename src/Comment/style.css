@@ -1,0 +1,21 @@
+div {
+    width: 100%;
+}
+div.c {
+    word-wrap: break-word;
+}
+/* The alert message box */
+.alert-warn{
+    padding: 20px;
+    background-color: #ff9800; /* blue */
+    color: #ffeb3b;
+    margin-bottom: 15px;
+}
+
+.alert {
+    padding: 20px;
+    background-color: #80d8ff; /* blue */
+    color: #ffeb3b;
+    margin-bottom: 15px;
+  }
+  
