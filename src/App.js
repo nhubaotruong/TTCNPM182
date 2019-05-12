@@ -5,6 +5,7 @@ import './App.css';
 import MaterialIcon, {colorPalette} from 'material-icons-react';
 import TopComic from './TopComic.js';
 import RecentUpload from './RecentUpload.js';
+import Storybroad from './Components/Storybroad/Storybroad.js';
 
 class App extends Component {
   render() {
@@ -27,7 +28,7 @@ class App extends Component {
             </li>
           </ul>
         </nav>
-        <span className="tit">Top Comics</span>
+        {/*<span className="tit">Top Comics</span>
         <div className="row">
           <TopComic comicPic="logo.png" comicName="Name 1" />
           <TopComic comicPic="logo.png" comicName="Name 2" />
@@ -38,7 +39,8 @@ class App extends Component {
         <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
         <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
         <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
-        <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />       
+        <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />*/}       
+        <Storybroad/>
       </div>
       <div>
       <footer className="page-footer grey darken-3">

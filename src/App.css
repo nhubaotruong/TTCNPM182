@@ -13,6 +13,9 @@
   padding-left: 10px;
   padding-right: 10px;
 }
+.carousel .carousel-item{
+  width:100%;
+}
 
 .right {
   margin-right: 10px;
@@ -24,3 +27,5 @@
   margin-top: 20px;
   font-size: 20px;
 }
+
+
