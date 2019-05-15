@@ -129,7 +129,10 @@ export default class CommentForm extends Component {
   isFormValid() {
     console.log(this.state.comment.name)
     console.log(this.state.comment.message)
-    return (this.state.comment.name !== "" && this.state.comment.message !== "") || (this.state.reply_.name !== "" && this.state.reply_.message !== "");
+    if(this.props.type_ === "Reply"){
+      return (this.state.reply_.name !== "" && this.state.reply_.message !== "");
+    }
+    return (this.state.comment.name !== "" && this.state.comment.message !== "");
   }
 
   // renderError() {

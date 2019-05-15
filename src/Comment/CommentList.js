@@ -1,7 +1,9 @@
 import React from "react";
 import Comment from "./Comment";
 import "./style.css";
+
 export default function CommentList(props) {
+
   return (
     <div className="commentList" key = {props.comments}>
       <h5 className="text-muted mb-4 " style ={{fontWeight: "bold"}}>
@@ -20,7 +22,8 @@ export default function CommentList(props) {
       ) : null}
 
       {props.comments.map((comment, index) => (
-        <Comment name = {comment.name} message = {comment.message} time = {comment.time} index_ = {index} rep = {comment.reply} id_c = {comment._id} key={index}/>
+        (props.soluong > index) ?
+        <Comment name = {comment.name} message = {comment.message} time = {comment.time} index_ = {index+1} rep = {comment.reply} id_c = {comment._id} key={index}/> : ""
       ))}
     </div>
   );

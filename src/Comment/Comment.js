@@ -9,120 +9,172 @@ export default class Comment extends Component {
     this.state = {
       replys: [],
       rep_1: false,
-      rep_2: -1
+      rep_2: -1,
+      dem_reply: 2,
+      trangthai_reply: ""
     };
 
     this.addReply = this.addReply.bind(this);
   }
 
   componentDidMount() {
-    this.setState({replys:this.props.rep});
+    this.setState({ replys: this.props.rep });
+    if (this.props.rep.length === 0) {
+      this.setState({ trangthai_reply: "", dem: 0 });
+    }
+    if (this.props.rep.length <= 2) {
+      this.setState({ trangthai_reply: "", dem: 2 });
+    } else {
+      this.setState({ trangthai_reply: "Hiển thị thêm..." })
+    }
     console.log(this.props.rep.length)
   }
-  Cancel(){
-    this.setState({rep_1: false})
-    this.setState({rep_2: -1})
+  Cancel() {
+    this.setState({ rep_1: false })
+    this.setState({ rep_2: -1 })
   }
-  Reply_1(){
+  Reply_1() {
     // localStorage.setItem("key", this.props.name);
     // alert("Bạn sẽ trả lời cho " + this.props.name);
     // var y = this.props.index_*200;
     // window.scrollBy(0, -y);
-    this.setState({rep_1: true})
+    this.setState({ rep_1: true })
   }
 
-  Reply_2(index){
-    this.setState({rep_2: index})
+  ChangeReply() {
+    var t = this.state.dem_reply + 2;
+    var a = this.state.replys.length;
+    if (t < a) {
+      this.setState({ trangthai_reply: "Hiển thị thêm...", dem_reply: t })
+    } else {
+      if (t === a) {
+        this.setState({ trangthai_reply: "Thu gọn lại...", dem_reply: t })
+      } else {
+        if (t - 2 < a && t > a) {
+          this.setState({ trangthai_reply: "Thu gọn lại...", dem_reply: t })
+        } else {
+          t = 1;
+          this.setState({ trangthai_reply: "Hiển thị thêm...", dem_reply: t })
+        }
+      }
+    }
+  }
+
+  Reply_2(index) {
+    this.setState({ rep_2: index });
   }
 
   addReply(reply) {
-    console.log(this.state.replys)
     console.log(reply)
+    
     this.setState({
-      replys: [...this.state.replys,reply],
+      replys: [...this.state.replys, reply],
       rep_1: false,
       rep_2: -1
     });
 
+    if (this.state.replys.length + 1 <= 2) {
+      this.setState({ trangthai_reply: "", dem_reply: 2 });
+    } else {
+      if(this.state.replys.length + 1 === this.state.dem_reply){
+        this.setState({ trangthai_reply: "Thu gọn lại..." })
+      }else{
+        this.setState({ trangthai_reply: "Hiển thị thêm..." })
+      }
+    }
+
     //Cập nhật reply cho comment ở db:
     axios
-    .post('/binhluan/3',{
-          id_comment: this.props.id_c,
-          name: reply.name,
-          message: reply.message,
-          time: reply.time,
-          replyto: reply.replyto
-    })
-    .then(res => {
+      .post('/binhluan/3', {
+        id_comment: this.props.id_c,
+        name: reply.name,
+        message: reply.message,
+        time: reply.time,
+        replyto: reply.replyto
+      })
+      .then(res => {
         console.log("Replied!");
-    })
-    .catch(err=>{
-      alert("Có lỗi xảy ra: "+ err)
-    })
+      })
+      .catch(err => {
+        alert("Có lỗi xảy ra: " + err)
+      })
     //Cập nhật reply cho comment ở db!
   }
 
-  returnReply(){
+  returnReply() {
     return this.state.replys.map((reply, index) => {
-      return <ul className="collection " style = {{marginLeft: "3%"}}>
-      <li className="collection-item avatar grey lighten-3">
-      <img
-          className="mr-3 bg-light circle"
-          width="48"
-          height="48"
-          src={logo}
-          alt={this.props.name} 
-          style={{marginRight: "10px"}}/>
-      <span className="title"><h5 className="mt-0 mb-1 text-muted"> <p style = {{fontWeight: "bold"}}>{reply.name}</p></h5></span>
-      <div className="c" style = {{textAlign: "justify",textJustify: "inter-word",marginLeft :"1%"}}><span className="blue-text">@{reply.replyto} </span> {reply.message}</div>
-      <button className="waves-effect blue btn" style = {{marginTop: "10px",marginLeft:"1%"}} onClick= {this.Reply_2.bind(this,index)}>Reply</button>
-      <small className="secondary-content text-muted">{reply.time} + {index} </small>
-      {this.state.rep_2 === index ? <button className="waves-effect blue btn" style = {{marginTop: "10px",marginLeft:"1%"}} onClick= {this.Cancel.bind(this)}>Huỷ</button>:""}
-      </li> 
-      <div>
-          {(this.state.rep_2===index) ? (<div>
-              <CommentForm addComment={this.addReply} type_ = "Reply" replyTo = {reply.name}/>
-              </div>
-            ):
-            ''}
-          </div>
-      </ul>}
-    )}
-  render(){
-    return (
-      <div>
-          <ul className="collection ">
+      if (this.state.dem_reply > index) {
+        return <ul className="collection " style={{ marginLeft: "4%" }}>
           <li className="collection-item avatar grey lighten-3">
-          <img
+            <img
               className="mr-3 bg-light circle"
               width="48"
               height="48"
               src={logo}
-              alt={this.props.name} 
-              style={{marginRight: "10px"}}/>
-          <span className="title"><h5 className="mt-0 mb-1 text-muted"> <p style = {{fontWeight: "bold"}}>{this.props.name}</p></h5></span>
-          <div className="c" style = {{textAlign: "justify",textJustify: "inter-word",marginLeft :"1%"}}>{this.props.message}</div>
-          <button className="waves-effect blue btn" style = {{marginTop: "10px",marginLeft:"1%"}} onClick= {this.Reply_1.bind(this)}>Reply</button>
-          <small className="secondary-content text-muted">{this.props.time} + {this.props.index_} </small>
-          {this.state.rep_1 ? <button className="waves-effect blue btn" style = {{marginTop: "10px",marginLeft:"1%"}} onClick= {this.Cancel.bind(this)}>Huỷ</button>:""}
+              alt={this.props.name}
+              style={{ marginRight: "10px" }} />
+            <span className="title"><h5 className="mt-0 mb-1 text-muted"> <p style={{ fontWeight: "bold" }}>{reply.name}</p></h5></span>
+            <div className="c" style={{ textAlign: "justify", textJustify: "inter-word", marginLeft: "1%" }}><span className="blue-text">@{reply.replyto} </span> {reply.message}</div>
+            <button className="waves-effect blue btn" style={{ marginTop: "10px", marginLeft: "1%" }} onClick={this.Reply_2.bind(this, index)}>Reply</button>
+            <small className="secondary-content text-muted">{reply.time} + {index+1} </small>
+            {this.state.rep_2 === index ? <button className="waves-effect blue btn" style={{ marginTop: "10px", marginLeft: "1%" }} onClick={this.Cancel.bind(this)}>Huỷ</button> : ""}
           </li>
+          <div>
+            {(this.state.rep_2 === index) ? (<div>
+              <CommentForm addComment={this.addReply} type_="Reply" replyTo={reply.name} />
+            </div>
+            ) :
+              ''}
+          </div>
+        </ul>
+      }
+    }
+    );
+  }
+  render() {
+    return (
+      <div>
+        <ul className="collection ">
+          <li className="collection-item avatar grey lighten-3">
+            <img
+              className="mr-3 bg-light circle"
+              width="48"
+              height="48"
+              src={logo}
+              alt={this.props.name}
+              style={{ marginRight: "10px" }} />
+            <span className="title"><h5 className="mt-0 mb-1 text-muted"> <p style={{ fontWeight: "bold" }}>{this.props.name}</p></h5></span>
+            <div className="c" style={{ textAlign: "justify", textJustify: "inter-word", marginLeft: "1%" }}>{this.props.message}</div>
+            <button className="waves-effect blue btn" style={{ marginTop: "10px", marginLeft: "1%" }} onClick={this.Reply_1.bind(this)}>Reply</button>
+            <small className="secondary-content text-muted">{this.props.time} + {this.props.index_} </small>
+            {this.state.rep_1 ? <button className="waves-effect blue btn" style={{ marginTop: "10px", marginLeft: "1%" }} onClick={this.Cancel.bind(this)}>Huỷ</button> : ""}
+          </li>
+          {/* Form reply */}
+          <div>
+            {this.state.rep_1 ? (<div style={{ marginLeft: "4%", paddingRight: "4%" }}>
+              <CommentForm addComment={this.addReply} type_="Reply" replyTo={this.props.name} />
+            </div>
+            ) :
+              ''}
+          </div>
+          {/* Form reply */}
+          
           {/* Reply */}
           <div>
             {this.returnReply()}
+            <button className="right blue-text" style={{
+              backgroundColor: "transparent",
+              backgroundRepeat: "no-repeat",
+              border: "none",
+              cursor: "pointer",
+              overflow: "hidden",
+              outline: "none"
+            }} onClick={this.ChangeReply.bind(this)}>{this.state.trangthai_reply}</button>
           </div>
           {/*Reply*/}
-          {/* Form reply */}
-          <div>
-          {this.state.rep_1 ? (<div style = {{marginLeft: "3%", paddingRight: "3%"}}>
-              <CommentForm addComment={this.addReply} type_ = "Reply" replyTo = {this.props.name}/>
-              </div>
-            ):
-            ''}
-          </div>
-          {/* Form reply */}
-          </ul>
-          </div>
-        );
+        </ul>
+      </div >
+    );
   }
 }
 

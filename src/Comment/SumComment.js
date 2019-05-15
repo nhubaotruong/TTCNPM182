@@ -12,7 +12,9 @@ class SumComment extends Component {
 
     this.state = {
       comments: [],
-      loading: false
+      loading: false,
+      dem_comment: 3,
+      trangthai_comment: ""
     };
 
     this.addComment = this.addComment.bind(this);
@@ -26,6 +28,14 @@ class SumComment extends Component {
       .get('/binhluan/2')
       .then(res => {
           console.log('res is ',res.data);
+          if (res.data.length === 0) {
+            this.setState({ trangthai_comment: "", dem_comment: 0 });
+          }
+          if (res.data.length <= 3) {
+            this.setState({ trangthai_comment: "", dem_comment: 3 });
+          } else {
+            this.setState({ trangthai_comment: "Hiển thị thêm bình luận..." })
+          }
           this.setState({comments:res.data,loading:false});
         }
       )
@@ -36,23 +46,50 @@ class SumComment extends Component {
       })
   }
 
+  ChangeComment() {
+    var t = this.state.dem_comment + 3;
+    var a = this.state.comments.length;
+    if (t < a) {
+      this.setState({ trangthai_comment: "Hiển thị thêm bình luận...", dem_comment: t })
+    } else {
+      if (t === a) {
+        this.setState({ trangthai_comment: "Thu gọn lại...", dem_comment: t })
+      } else {
+        if (t - 3 < a && t > a) {
+          this.setState({ trangthai_comment: "Thu gọn lại...", dem_comment: t })
+        } else {
+          t = 3;
+          this.setState({ trangthai_comment: "Hiển thị thêm bình luận...", dem_comment: t })
+        }
+      }
+    }
+  }
   /**
    * Add new comment
    * @param {Object} comment
    */
   addComment(comment) {
     console.log(comment)
-    console.log(this.state.comments)
+    console.log(this.state.comments.length)
     this.setState({
       loading: false,
       comments: [comment, ...this.state.comments]
     });
+    if (this.state.comments.length <= 3) {
+      this.setState({ trangthai_comment: "", dem_comment: 3 });
+    } else {
+      if(this.state.comments.length === this.state.dem_comment){
+        this.setState({ trangthai_comment: "Thu gọn lại..." })
+      }else{
+        this.setState({ trangthai_comment: "Hiển thị thêm bình luận..." })
+      }
+    }
   }
 
   render() {
     return (
       <div className="App container bg-light shadow m 2">
-        <div className="column" style={{border:"0.5px solid black",padding: "1%"}}>
+        <div className="column" style={{border:"0.5px solid black",padding: "1%", paddingBottom: "2%"}}>
           <div className="col-12  pt-3">
             <h3 className = "blue-text" style={{fontWeight: "bold"}}>NHẬN XÉT VÀ BÌNH LUẬN:</h3>
             <CommentForm addComment={this.addComment} type_ = "Comment"/>
@@ -61,7 +98,16 @@ class SumComment extends Component {
             <CommentList
               loading={this.state.loading}
               comments={this.state.comments}
+              soluong = {this.state.dem_comment}
             />
+            <button className="right blue-text" style={{
+              backgroundColor: "transparent",
+              backgroundRepeat: "no-repeat",
+              border: "none",
+              cursor: "pointer",
+              overflow: "hidden",
+              outline: "none"
+            }} onClick={this.ChangeComment.bind(this)}>{this.state.trangthai_comment}</button>
           </div>
         </div>
       </div>
