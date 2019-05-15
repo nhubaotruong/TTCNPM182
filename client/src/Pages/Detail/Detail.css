@@ -1,0 +1,9 @@
+.text1{
+    font-size: 30px;
+    color: blueviolet;
+    font-weight: bold;
+}
+
+#comicPic {
+	max-width:300px;
+}

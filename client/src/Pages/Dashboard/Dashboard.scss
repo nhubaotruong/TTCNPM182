@@ -1,0 +1,54 @@
+.tabsvertical {
+    .ads {
+        height: 100%;
+        width: 100%;
+        -ms-flex-direction: column;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+        display: -webkit-flex;
+        display: flex;
+    }
+
+    .sth {
+        width: 100%;
+
+        .active {
+            -moz-transition: border-color .5s ease;
+            -o-transition: border-color .5s ease;
+            -webkit-transition: border-color .5s ease;
+            transition: border-color .5s ease;
+            border-left: 3px solid #1565c0;
+            
+        }
+
+        :hover {
+            border-left: 3px solid #90caf9;
+        }
+    }
+
+    .indicator {
+        display: none;
+    }
+
+    .waves-effect.waves-pik .waves-ripple {
+         background-color: rgba(252, 238, 239, 1);
+       }
+}
+
+// // .tits {
+//     font-size: 20px;
+// }
+
+// .admin-butt {
+//     width: 100%;
+// }
+
+.col.s12 > .btn {
+    width: 110%;
+  }
+
+// .center {
+//     margin: auto;
+//     width: 70%;
+//     padding: 10px;
+//   }

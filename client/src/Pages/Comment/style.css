@@ -1,0 +1,6 @@
+div {
+    width: 100%;
+}
+div.c {
+    word-wrap: break-word;
+}
