@@ -6,6 +6,10 @@ import MaterialIcon, {colorPalette} from 'material-icons-react';
 import TopComic from './TopComic.js';
 import RecentUpload from './RecentUpload.js';
 import Storybroad from './Components/Storybroad/Storybroad.js';
+import ReadComic from './Components/ReadComic/ReadComic.jsx';
+
+
+
 
 class App extends Component {
   render() {
@@ -28,19 +32,8 @@ class App extends Component {
             </li>
           </ul>
         </nav>
-        {/*<span className="tit">Top Comics</span>
-        <div className="row">
-          <TopComic comicPic="logo.png" comicName="Name 1" />
-          <TopComic comicPic="logo.png" comicName="Name 2" />
-          <TopComic comicPic="logo.png" comicName="Name 3" />
-          <TopComic comicPic="logo.png" comicName="Name 4" />
-        </div>  
-        <span className="tit">Recent Uploads</span>
-        <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
-        <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
-        <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
-        <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />*/}       
-        <Storybroad/>
+        <ReadComic comicName = "Naruto" chapter ="1"/>
+        {/*<Storybroad/>*/}
       </div>
       <div>
       <footer className="page-footer grey darken-3">

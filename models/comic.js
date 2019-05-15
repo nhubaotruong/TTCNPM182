@@ -2,18 +2,18 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
 const ComicSchema = new Schema({
-    name: {
-        type: String
-    },
-    author: {
-        type: String
-    },
-    category: {
-        type: String
-    },
-    view: {
-        type: String
-    }
+    name: String,
+    author: String,
+    category: String,
+    view: String,
+    data: [
+        {
+            chapter : Number,
+            link : [                    //      array cac path dan den cac anh truyen dung cho readcomic
+                {type : String}         //
+            ]                           //
+        }
+    ]
     
 })
 

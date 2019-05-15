@@ -171,4 +171,22 @@ comics.post('/deleteNotice',(req,res) =>{
 
 
 
+comics.post('/readcomic', (req,res) =>{
+    
+    comic.findOne({name : req.body.comicName})
+        .then(e => {
+            for (var i of e.data)
+            {
+                if(req.body.chapter == i.chapter)
+                {
+                    res.json(i.link)
+                    break
+                }
+            }
+        })
+    
+})
+
+
+
 module.exports = comics
