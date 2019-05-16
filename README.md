@@ -3,5 +3,3 @@ Thực hiện `npm install` hai lần (trong thư mục project và client)<br>
 `node insertComics.js` <br>
 `cd client` <br>
 `npm start`
-<br>
-testing

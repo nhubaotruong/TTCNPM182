@@ -1,6 +1,7 @@
 import React from 'react';
 
 const recentUpload = (props) => {
+    var url = "/detail" + "?" + "c=" + props.comicName;
     return (
         <div className="row">
             <div className="col m12 s12">
@@ -13,7 +14,7 @@ const recentUpload = (props) => {
                             <p>{props.comicDes}</p>
                         </div>
                         <div className="card-action right-align">
-                            <a href="">Read more...</a>
+                            <a href={url}>Read more...</a>
                         </div>
                     </div>
                 </div>

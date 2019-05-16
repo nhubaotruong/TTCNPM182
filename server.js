@@ -22,7 +22,6 @@ mongoose.connection
 .catch(err=>console.log(err.message));
 
 var ComicSchema =  require("./models/Comic");
-var UserSchema = require("./models/User")
 
 app.set("view engine","ejs");
 app.set("views","./views");
@@ -30,7 +29,6 @@ app.use(express.static("public"));
 
 // Tạo table commic
 const Comic = mongoose.model("comic",ComicSchema);
-const User = mongoose.model("user", UserSchema);
 
 // // Hiển thị danh sách truyện trên trang truyện
 // app.get("/",(req,res)=>{
@@ -64,17 +62,69 @@ const User = mongoose.model("user", UserSchema);
 //     .catch((e)=>console.log(e.message));
 // });
 
-app.post("/addComic", urlencodedParser, function (req, res) {
+app.post("/adComic", urlencodedParser, function (req, res) {
     // create user in req.body
-    const {comicName,author} = req.body;
+    const {comicName,author,artist,company,description,avatar,kind} = req.body;
+    const arr_kind = [];
+    console.log(kind.length)
+    for(x in kind){
+        if(kind[x]=='1'){
+            arr_kind.push("Action");
+        }
+        else if(kind[x]=='2'){
+            arr_kind.push("Adventure");
+        }
+        else if(kind[x]=='3'){
+            arr_kind.push("Comedy");
+        }
+        else if(kind[x]=='4'){
+            arr_kind.push("Comic");
+        }
+        else if(kind[x]=='5'){
+            arr_kind.push("Drama");
+        }
+        else if(kind[x]=='6'){
+            arr_kind.push("Game");
+        }
+        else if(kind[x]=='7'){
+            arr_kind.push("Horror");
+        }
+        else if(kind[x]=='8'){
+            arr_kind.push("Magic");
+        }
+        else if(kind[x]=='9'){
+            arr_kind.push("Mecha");
+        }
+        else if(kind[x]=='10'){
+            arr_kind.push("Mystery");
+        }
+        else if(kind[x]=='11'){
+            arr_kind.push("Romance");
+        }
+        else if(kind[x]=='12'){
+            arr_kind.push("Sci-fi");
+        }
+        else if(kind[x]=='13'){
+            arr_kind.push("Sports");
+        }
+        else if(kind[x]=='14'){
+            arr_kind.push("Supernatural");
+        }
+        else if(kind[x]=='15'){
+            arr_kind.push("Tragedy");
+        }
+    }
+    console.log(arr_kind)
     Comic.create({
         comicName,
         author,
-        artist:"khang",
-        company:"khang",
+        artist,
+        company,
         status:1,
-        description:"...",
-        avatar:"http://image.phimmoi.net/film/162/poster.medium.jpg"
+        description,
+        avatar,
+        view: 0,
+        kind: arr_kind
     })
     .then(()=>{
         res.redirect("/");
@@ -102,10 +152,9 @@ app.post("/sendComic", urlencodedParser, function (req, res) {
 app.post("/searchComic", urlencodedParser, function (req, res) {
     // create user in req.body
     const {comicName} = req.body;
-    console.log(comicName)
     // Comic.find({comicName: comicName})
     Comic.find({
-        comicName : new RegExp(comicName)
+        comicName : new RegExp(comicName,'i')
     })
     .then(listComic=>{
         res.send(listComic);
