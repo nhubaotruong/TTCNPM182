@@ -22,6 +22,7 @@ mongoose.connection
 .catch(err=>console.log(err.message));
 
 var ComicSchema =  require("./models/Comic");
+var UserSchema = require("./models/User")
 
 app.set("view engine","ejs");
 app.set("views","./views");
@@ -29,6 +30,7 @@ app.use(express.static("public"));
 
 // Tạo table commic
 const Comic = mongoose.model("comic",ComicSchema);
+const User = mongoose.model("user", UserSchema);
 
 // // Hiển thị danh sách truyện trên trang truyện
 // app.get("/",(req,res)=>{
@@ -62,7 +64,7 @@ const Comic = mongoose.model("comic",ComicSchema);
 //     .catch((e)=>console.log(e.message));
 // });
 
-app.post("/adComic", urlencodedParser, function (req, res) {
+app.post("/addComic", urlencodedParser, function (req, res) {
     // create user in req.body
     const {comicName,author} = req.body;
     Comic.create({
