@@ -13,10 +13,9 @@ class Add extends Component{
 			author : " ",
 			artist: " ",
 			company: " ",
-			status: " ",
 			description: " ",
 			avatar: " ",
-			view: " ",
+			kind: []
 		}
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -32,6 +31,10 @@ class Add extends Component{
 			[e.target.name] : e.target.value
 		})
 	}
+	handleChange = (e) => {
+		let value = Array.from(e.target.selectedOptions, option => option.value);
+		this.setState({kind: value});
+	}
 	onSubmit(e){	
 		e.preventDefault()
 		const newComic = {
@@ -39,7 +42,9 @@ class Add extends Component{
 			author : this.state.author,
 			artist: this.state.artist,
 			company: this.state.company,
-			status: this.state.status
+			description: this.state.description,
+			avatar: this.state.avatar,
+			kind: this.state.kind
 		}
 		addComic(newComic).then(res=>{
 			console.log("Add thành công!!!");
@@ -53,7 +58,7 @@ class Add extends Component{
 				<input type="text" class="form-control" name="comicName" onChange={this.onChange}/>
 			</div>
 			<div class="input-field">
-				<select multiple>
+				<select multiple onChange={this.handleChange} value={this.props.kind}>
 					<option value="1">Action</option>
 					<option value="2">Adventure</option>
 					<option value="3">Comedy</option>
@@ -81,18 +86,18 @@ class Add extends Component{
 				<input type="text" class="form-control" name="artist" onChange={this.onChange}/>
 			</div>
 			<div class="form-group">
+				<label >Ảnh bìa:</label>
+				<input type="text" class="form-control" name="avatar" onChange={this.onChange}/>
+			</div>
+			<div class="form-group">
 				<label >Nhà xuất bản:</label>
 				<input type="text" class="form-control" name="company" onChange={this.onChange}/>
 			</div>
-			{/* <div class="form-group" >
-				<label >Mô tả:</label>
-				<textarea class="form-control" rows="50" onChange={this.onChange}></textarea>
-			</div> */}
 			<div class="row">
 				<form class="col s12">
 				<div class="row">
 					<div class="input-field col s12">
-					<textarea id="textarea1" class="materialize-textarea"></textarea>
+					<textarea id="textarea1" class="materialize-textarea" name="description" onChange={this.onChange}></textarea>
 					<label for="textarea1">Mô tả</label>
 					</div>
 				</div>

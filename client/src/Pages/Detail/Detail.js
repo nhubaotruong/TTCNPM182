@@ -3,6 +3,12 @@ import "./Detail.css";
 import ComicDetail from './ComicDetail';
 class Detail extends Component {
     render() {
+        var kind = this.props.comic.kind;
+        var str_kind = "";
+        for(var x in kind){
+            str_kind += kind[x] + ", "
+        }
+        var str_kind1 = str_kind.substring(0,str_kind.length-2);
         return (
             <div>
                 <table>
@@ -13,12 +19,12 @@ class Detail extends Component {
                     </thead>
                     <tbody>
                         <tr>
-                            <td><img id="comicPic" src="logo.png" /></td>
+                            <td><img id="comicPic" src={this.props.comic.avatar} /></td>
                             <td>
                                 <ComicDetail rating="4/5(10 lượt đánh giá)" 
                                              author={this.props.comic.author} artist={this.props.comic.artist} 
-                                             genre="Comic hành động-Action, Quân sự- Military, Ly kỳ- Thriller, Siêu nhiên- Super Natural, Huyền ảo- Magical" p
-                                             ublisher="Chưa rõ" 
+                                             genre={str_kind1} p
+                                             publisher={this.props.comic.company}
                                              status="Chưa rõ"/>
                             </td>
                         </tr>

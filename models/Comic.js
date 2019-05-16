@@ -12,6 +12,7 @@ const ComicSchema = new Schema({
     description: {type: String, required: true},
     avatar : {type: String, required: true},
     view : {type: Number, default: 0},
+    kind: [String],
     data: [
         {
             chapter : Number,
