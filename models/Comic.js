@@ -15,15 +15,18 @@ const ComicSchema = new Schema({
     kind: [String],
     data: [
         {
+            chapterNum: Number,
             chapter : String,
-            link : String
+            link : [
+                {
+                    type: String
+                }
+            ]
         }
     ],
     comment: [{
-        idcomment:{
             type: Schema.Types.ObjectId,
             ref: 'comments'
-        }
     }]
 });
 

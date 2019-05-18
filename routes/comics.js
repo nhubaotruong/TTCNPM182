@@ -2,12 +2,14 @@
 const express = require("express")
 const comics = express.Router()
 const cors = require("cors")
-const jwt = require("jsonwebtoken")
-const bcrypt = require("bcrypt")
+const mongoose = require("mongoose");
+// const jwt = require("jsonwebtoken")
+// const bcrypt = require("bcrypt")
 
-const comic = require("../models/comic")
+var ComicSchema =  require("../models/Comic");
+const Comic = mongoose.model("comic",ComicSchema);
 comics.use(cors())
-const user = require("../models/user")
+const user = require("../models/User")
 
 
 // "5ccdb65ebf4a5a028072c22d" : id cua user trong database
@@ -29,24 +31,24 @@ comics.get('/showFavouriteList',(req,res) => {
 
 
 
-// comics.get('/showFavouriteList',(req,res) => {
-//     user.find({_id : "5ccdb65ebf4a5a028072c22d"})
-//     .then(e => {
+comics.get('/showFavouriteList',(req,res) => {
+    user.find({_id : "5ccdb65ebf4a5a028072c22d"})
+    .then(e => {
         
-//         // console.log(typeof(req.body.id))
-//         var id_comics = []
-//         for (var i of e[0].FavouriteList)
-//         {
-//             id_comics.push({"_id" : i})
-//         }
-//         comic.find({ $or :id_comics })
-//             .then(f => res.json(f))
+        // console.log(typeof(req.body.id))
+        var id_comics = []
+        for (var i of e[0].FavouriteList)
+        {
+            id_comics.push({"_id" : i})
+        }
+        comic.find({ $or :id_comics })
+            .then(f => res.json(f))
         
-//     })
-//     .catch(err => {
-//         res.send('error : ' + err)
-//     })
-// })
+    })
+    .catch(err => {
+        res.send('error : ' + err)
+    })
+})
 
 
 
@@ -169,15 +171,40 @@ comics.post('/deleteNotice',(req,res) =>{
     })
 })
 
+comics.post('/getcomic', (req,res) =>{
+    console.log(req.body.comicName)
+    Comic.findOne({comicName: req.body.comicName}).populate('comment')
+    .then(e =>{
+        if(e != null){
+            res.json(e.comment)
+        }
+    })
+    .catch(err => {
+        console.log(err)
+    })
+})
 
+comics.post('/addcomment_comic', (req,res) =>{
+    console.log(req.body.comment)
+    Comic.findOneAndUpdate({comicName: req.body.comicname},{$push: {"comment": req.body.comment}},{new: true}, (err, result)=>{
+        if(err){
+            console.log(err);
+            res.send(err)
+        }else{
+            console.log("RESULT: " + result);
+            res.send("Completed!")
+        }
+    })
+    
+})
 
 comics.post('/readcomic', (req,res) =>{
-    
-    comic.findOne({name : req.body.comicName})
+    // res.json(req.body.comicName)
+    Comic.findOne({comicName : req.body.comicName})
         .then(e => {
             for (var i of e.data)
             {
-                if(req.body.chapter == i.chapter)
+                if(req.body.chapter == i.chapterNum)
                 {
                     res.json(i.link)
                     break

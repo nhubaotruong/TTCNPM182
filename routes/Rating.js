@@ -52,7 +52,7 @@ ratings.post('/1', (req,res) =>{
 })
 
 ratings.post('/2',(req,res) => {
-    console.log(req.body.id)
+    // console.log(req.body.id)
     Rating.findOne({
         id: req.body.id
     })

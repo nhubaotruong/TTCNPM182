@@ -24,26 +24,50 @@ class SumComment extends Component {
     // loading
     this.setState({ loading: true });
 
+    // axios
+    //   .get('/binhluan/2')
+    //   .then(res => {
+    //       console.log('res is ',res.data);
+    //       if (res.data.length === 0) {
+    //         this.setState({ trangthai_comment: "", dem_comment: 0 });
+    //       }
+    //       if (res.data.length <= 3) {
+    //         this.setState({ trangthai_comment: "", dem_comment: 3 });
+    //       } else {
+    //         this.setState({ trangthai_comment: "Hiển thị thêm bình luận..." })
+    //       }
+    //       this.setState({comments:res.data,loading:false});
+    //     }
+    //   )
+    //   .catch(err => {
+    //     console.log('error is ',err);
+    //     alert(err);
+    //     this.setState({ loading: false });
+    //   })
     axios
-      .get('/binhluan/2')
-      .then(res => {
-          console.log('res is ',res.data);
-          if (res.data.length === 0) {
-            this.setState({ trangthai_comment: "", dem_comment: 0 });
-          }
-          if (res.data.length <= 3) {
-            this.setState({ trangthai_comment: "", dem_comment: 3 });
-          } else {
-            this.setState({ trangthai_comment: "Hiển thị thêm bình luận..." })
-          }
-          this.setState({comments:res.data,loading:false});
-        }
-      )
-      .catch(err => {
-        console.log('error is ',err);
-        alert(err);
-        this.setState({ loading: false });
-      })
+    .post('/comics/getcomic',{comicName : this.props.ComicName})
+            .then(res => {
+              if(res.data != null){
+                console.log('res is ',res.data);
+                    if (res.data.length === 0) {
+                      this.setState({ trangthai_comment: "", dem_comment: 0 });
+                    }
+                    if (res.data.length <= 3) {
+                      this.setState({ trangthai_comment: "", dem_comment: 3 });
+                    } else {
+                      this.setState({ trangthai_comment: "Hiển thị thêm bình luận..." })
+                    }
+                    this.setState({comments:res.data,loading:false});
+                  }
+                  else{
+                    this.setState({loading:false});
+                  }
+            })
+            .catch(err => {
+              console.log('error is ',err);
+                  alert(err);
+                  this.setState({ loading: false });
+            })
   }
 
   ChangeComment() {
@@ -92,7 +116,7 @@ class SumComment extends Component {
         <div className="column" style={{border:"0.5px solid black",padding: "1%", paddingBottom: "2%"}}>
           <div className="col-12  pt-3">
             <h3 className = "blue-text" style={{fontWeight: "bold"}}>NHẬN XÉT VÀ BÌNH LUẬN:</h3>
-            <CommentForm addComment={this.addComment} type_ = "Comment"/>
+            <CommentForm addComment={this.addComment} type_ = "Comment" comicName = {this.props.ComicName}/>
           </div>
           <div className="col-12  pt-3 bg-white">
             <CommentList

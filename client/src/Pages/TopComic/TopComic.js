@@ -7,7 +7,7 @@ const topComic = (props) => {
                 <div className="col m3 s12">
                     <div className="card hoverable">
                         <div className="card-image">
-                            <a href={url}><img src={props.comicPic} alt="tt" width="200px" height="350px"/></a>
+                            <img src={props.comicPic} alt="tt" width="200px" height="350px"/>
                         </div>
                         <div className="card-content">
                             <p>{props.comicName}</p>
