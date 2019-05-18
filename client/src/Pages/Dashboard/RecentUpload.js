@@ -18,16 +18,16 @@ class RecentUpload extends Component{
         return (
             <div className="row">
                 <div className="col m12 s12">
-                    <div className="card hoverable horizontal">
-                        <div className="card-image">
+                    <div className="card hoverable horizontal grey lighten-5">
+                        <div className="card-image valign-wrapper">
                             <img src={this.props.comicPic} alt="tt" style={{width:"200px"}} />
                         </div>
                         <div className="card-stacked">
                             <div className="card-content">
-                                <p><b>{this.props.comicName}</b></p>
-                                <p>Views: {this.props.comic.view}</p>
-                                <p>Author: {this.props.comic.author}</p>
-                                <p>Category: {str_kind1}</p>
+                                <p><b>{this.props.comicName}</b></p><br/>
+                                <p>Views: {this.props.comic.view}</p><br/>
+                                <p>Author: {this.props.comic.author}</p><br/>
+                                <p>Category: {str_kind1}</p><br/>
                                 <p className="truncate">Mô tả: {this.props.comic.description.substring(0,50)}...</p>
                             </div>
                             <div className="card-action right-align">
