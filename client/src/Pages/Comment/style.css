@@ -1,9 +1,4 @@
-div {
-    width: 100%;
-}
-div.c {
-    word-wrap: break-word;
-}
+
 /* The alert message box */
 .alert-warn{
     padding: 20px;

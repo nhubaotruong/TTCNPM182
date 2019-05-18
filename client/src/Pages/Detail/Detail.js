@@ -18,9 +18,9 @@ class Detail extends Component {
                         </tr>   
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><img id="comicPic" src={this.props.comic.avatar} /></td>
-                            <td>
+                        <tr className="row">
+                            <td className="col m4"><img id="comicPic" src={this.props.comic.avatar} /></td>
+                            <td className="col m8">
                                 <ComicDetail idComic={this.props.comic._id} 
                                              author={this.props.comic.author} artist={this.props.comic.artist} 
                                              genre={str_kind1} p
