@@ -81,6 +81,44 @@ comics.post('/deleteFavouriteList',(req,res) =>{
 })
 
 
+
+comics.post('/insertFavouriteList',(req,res) =>{
+    // const id_comic_delete = {id : rep.body.id}
+    user.findOne({_id : "5ccdb65ebf4a5a028072c22d"})
+    .then(e => {
+        
+        var insert = true  // check xem da co trong favouritelist chua
+        for (var i of e.FavouriteList)
+        {
+            if (i.idcomic == req.body.id)
+            {
+                insert = false
+                break
+            }
+            
+        }
+        if (insert)
+        {
+            e.FavouriteList.push({"idcomic" : req.body.id})
+            user.findOneAndUpdate({"_id" : "5ccdb65ebf4a5a028072c22d"},{$set:{"FavouriteList" : e.FavouriteList}},{new: true}).then(doc => {
+                console.log("insert done")
+            })
+            .catch(err => {
+                console.error(err)
+            })
+            res.json(insert)
+        }
+        
+        res.json(insert)
+    })
+    .catch(err => {
+        res.send('error : ' + err)
+    })
+})
+
+
+
+
 comics.get('/showHistory',(req,res) => {
     user.findOne({_id : "5ccdb65ebf4a5a028072c22d"}).populate('History.idcomic')
         .then(e => {
@@ -123,6 +161,9 @@ comics.post('/deleteHistory',(req,res) =>{
         res.send('error : ' + err)
     })
 })
+
+
+
 
 
 

@@ -32,9 +32,9 @@ class App extends Component {
             </li>
           </ul>
         </nav>
-        {/*<ReadComic comicName = "Naruto" chapter ="1"/>*/}
+        {<ReadComic comicName = "Naruto" chapter ="1"/>}
         {/*<Storybroad/>*/}
-        <Signin/>
+        
       </div>
       <div>
       <footer className="page-footer grey darken-3">

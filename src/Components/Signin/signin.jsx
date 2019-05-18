@@ -36,6 +36,9 @@ class signin extends Component
                 else if (res.data === true)
                 {
                     alert("Đăng nhập thành công!!!")
+                    localStorage.setItem('User', res.data)
+                    this.props.history.push(`/Home`)
+
                 }
                 else 
                 {
