@@ -102,6 +102,17 @@ export default class CommentForm extends Component {
               loading: false,
               comment: { message: "", time: "", name: "" }
             });
+            axios
+            .post('/comics/addcomment_comic',{
+              comment: res.data._id,
+              comicname: this.props.comicName
+            })
+            .then(res =>{
+              console.log("Completed!")
+            })
+            .catch(err =>{
+              console.log(err)
+            })
           }
         })
         .catch(err => {

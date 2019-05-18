@@ -8,9 +8,9 @@ class resultcell extends Component {
         var url = "/detail?c=" + this.props.name;
         return (
             <div>
-                <table className="valign-wrapper" style={{border:"none"}}>
+                <table style={{border:"none"}}>
                     <tr>
-                    <td><a href={url}><img src={this.props.comicPic} alt="comicPic" style={{width:"180px"}}/></a></td>
+                    <td><img src={this.props.comicPic} alt="comicPic" style={{width:"180px"}}/></td>
                     <td>
                         <div className="padd">
                         <a className="text-link" href={url}>{this.props.name}</a>

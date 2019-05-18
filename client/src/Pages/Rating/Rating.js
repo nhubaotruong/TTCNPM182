@@ -311,12 +311,12 @@ class ReactStars extends Component {
         } = this.props
 
         return (
-            <div style = {{marginLeft: "20px"}}>
-                <div className={className} style={parentStyles} className="valign-wrapper">
+            <div style = {{backgroundColor: "rgb(0, 64, 255)",border: "0.5px solid green",width: "auto", height: "100%", marginLeft: "1%",borderRadius: "5px"}}>
+                <div className={className} style={parentStyles}>
                     {this.state.config.half ?
                         this.renderHalfStarStyleElement() : ''}
                     {this.renderStars()}
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className = "grey-text text-darken-3">{this.state.summary}/5.00 ({this.state.sum} đánh giá!) </span>
+                       <span className = "yellow-text">{this.state.summary}/5.00 ({this.state.sum} đánh giá!) </span>
                 </div>
             </div>
             // {this.state.summary} ({this.state.sum} đánh giá!)          
