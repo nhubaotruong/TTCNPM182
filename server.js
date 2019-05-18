@@ -114,7 +114,6 @@ app.post("/adComic", urlencodedParser, function (req, res) {
             arr_kind.push("Tragedy");
         }
     }
-    console.log(arr_kind)
     Comic.create({
         comicName,
         author,
@@ -131,6 +130,15 @@ app.post("/adComic", urlencodedParser, function (req, res) {
     })
     .catch((e)=>console.log(e.message));
 });
+
+app.post("/deleteComic",(req,res)=>{
+    const {comicName} = req.body;
+    Comic.deleteOne({comicName:comicName})
+    .then(()=>{
+        console.log("Xóa thành công")
+    })
+    .catch((e)=>console.log(e.message))
+})
 
 app.post("/home",(req,res)=>{
     Comic.find()

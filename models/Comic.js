@@ -15,10 +15,8 @@ const ComicSchema = new Schema({
     kind: [String],
     data: [
         {
-            chapter : Number,
-            link : [                    //      array cac path dan den cac anh truyen dung cho readcomic
-                {type : String}         //
-            ]                           //
+            chapter : String,
+            link : String
         }
     ]
 });

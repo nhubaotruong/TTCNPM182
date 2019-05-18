@@ -15,3 +15,13 @@ export const addComic = newComic => {
         console.log("Add Successful!!");
     })
 }
+
+export const deleteComic = comicName => {
+    return axios
+    .post("/deleteComic",{
+        comicName : comicName
+    })
+    .then(res=>{
+        console.log("Delete Successful!!");
+    })
+}
