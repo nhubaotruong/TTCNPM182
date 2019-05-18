@@ -27,6 +27,11 @@ var Comics = require('./routes/comics')
 
 app.use('/comics', Comics)
 
+
+var Users = require('./routes/users')
+
+app.use('/users',Users)
+
 app.listen(port, () => {
     console.log("Server is running on port: " + port)
 })

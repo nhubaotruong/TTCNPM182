@@ -7,8 +7,8 @@ import TopComic from './TopComic.js';
 import RecentUpload from './RecentUpload.js';
 import Storybroad from './Components/Storybroad/Storybroad.js';
 import ReadComic from './Components/ReadComic/ReadComic.jsx';
-
-
+import Signup from './Components/Signup/Signuppage.jsx';
+import Signin from './Components/Signin/Signinpage.jsx';
 
 
 class App extends Component {
@@ -32,8 +32,9 @@ class App extends Component {
             </li>
           </ul>
         </nav>
-        <ReadComic comicName = "Naruto" chapter ="1"/>
+        {/*<ReadComic comicName = "Naruto" chapter ="1"/>*/}
         {/*<Storybroad/>*/}
+        <Signin/>
       </div>
       <div>
       <footer className="page-footer grey darken-3">
