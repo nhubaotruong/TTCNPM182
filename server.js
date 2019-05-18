@@ -1,13 +1,13 @@
 var express = require("express");
 var bodyParser = require("body-parser");
-
+var cors = require("cors");
 
 var app = express();
 
 var port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
-
+app.use(cors())
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
  
 const mongoose = require("mongoose");
@@ -30,37 +30,6 @@ app.use(express.static("public"));
 // Tạo table commic
 const Comic = mongoose.model("comic",ComicSchema);
 
-// // Hiển thị danh sách truyện trên trang truyện
-// app.get("/",(req,res)=>{
-//     Comic.find()
-//     .then(comics=>{
-//         res.render("listcomic",{comics});
-//     })
-//     .catch(e=>console.log(e));
-// });
-
-// // Add truyện
-// app.get("/add",(req,res)=>{
-//     res.render("addcomic");
-// });
-
-// app.post("/add", urlencodedParser, function (req, res) {
-//     // create user in req.body
-//     const {comicName,author,artist,company,status,description,avatar} = req.body;
-//     Comic.create({
-//         comicName,
-//         author,
-//         artist,
-//         company,
-//         status,
-//         description,
-//         avatar
-//     })
-//     .then(()=>{
-//         res.redirect("/");
-//     })
-//     .catch((e)=>console.log(e.message));
-// });
 
 app.post("/adComic", urlencodedParser, function (req, res) {
     // create user in req.body
@@ -169,6 +138,14 @@ app.post("/searchComic", urlencodedParser, function (req, res) {
     })
     .catch(e=>console.log(e));
 });
+
+
+// Comments: Sơn
+var Comments = require('./routes/Comments');
+app.use('/binhluan',Comments);
+
+var Ratings = require('./routes/Rating');
+app.use('/xep_hang',Ratings);
 
 app.listen(port,()=>{
     console.log("Server is listening on " + port);
