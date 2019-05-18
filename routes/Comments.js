@@ -4,7 +4,7 @@ const cors = require("cors")
 // const jwt = require("jsonwebtoken")
 // const bcrypt = require("bcrypt")
 
-const Comment = require("../model/Comment")
+const Comment = require("../models/Comment")
 comments.use(cors())
 
 comments.post('/1', (req,res) => {
@@ -17,7 +17,7 @@ comments.post('/1', (req,res) => {
 
     Comment.create(commentData)
     .then(comment => {
-        res.json({status: 'add comment complete!'})
+        res.json(comment)
     })
     .catch(err => {
         res.send('error: ' + err)

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>List Comic</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>List Comics</h2>
+                <a class="btn btn-primary" href="/add">Add new Comic</a>
+                <br><br>
+            </div>
+        </div>
+        <div class="row">
+            <%if(comics.length > 0){%>
+            <table class="table">
+                <thead>
+                    <th>STT</th>
+                    <th>Name</th>
+                    <th>Avatar</th>
+                    <!-- <th>Link</th>
+                    <th>Options</th> -->
+                </thead>
+                <tbody>
+                    <%
+                    comics.forEach((comic,index)=>{
+                    %>
+                    <tr>
+                        <td><%=index+1%></td>
+                        <td><%=comic.comicName%></td>
+                        <td>
+                            <img src="images/<%=comic.avatar%>.png"  width="100">
+                        </td>
+                    </tr>
+                    <% 
+                    })
+                    %>
+                </tbody>
+            </table>
+            <%}else{%>
+            <div>             
+                <div class="panel panel-danger center">
+                      <div class="panel-heading">
+                            <h3 class="panel-title">Server Notify</h3>
+                      </div>
+                      <div class="panel-body">
+                            Comic Not Found
+                      </div>
+                </div>    
+            </div>
+            <%}%>
+        </div>
+    </div>
+</body>
+</html>

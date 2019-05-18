@@ -2,7 +2,7 @@ const express = require("express")
 const ratings = express.Router()
 const cors = require("cors")
 
-const Rating = require("../model/Rating")
+const Rating = require("../models/Rating")
 ratings.use(cors())
 
 ratings.post('/1', (req,res) =>{
@@ -14,6 +14,7 @@ ratings.post('/1', (req,res) =>{
         star_4: req.body.star_4,
         star_5: req.body.star_5
     }
+    console.log(req.body.id)
     Rating.findOne({
         id: req.body.id
     })
@@ -51,6 +52,7 @@ ratings.post('/1', (req,res) =>{
 })
 
 ratings.post('/2',(req,res) => {
+    // console.log(req.body.id)
     Rating.findOne({
         id: req.body.id
     })
