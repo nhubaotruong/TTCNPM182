@@ -26,7 +26,7 @@ class Delete extends Component{
 	showListComic = () => {
 		if(this.state.listComics.length>0){
 			return this.state.listComics.map((e)=>{
-					return <RecentUpload comicPic={e.avatar} comicDes={e.description} comicName={e.comicName} />
+					return <RecentUpload comicPic={e.avatar} comicDes={e.description} comicName={e.comicName} comic={e} />
 			})
 		}
 	}
