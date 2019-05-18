@@ -70,8 +70,10 @@ class ReactStars extends Component {
     }
 
     componentDidMount() {
+            console.log(this.props.idComic)
+
         axios
-            .post('/xep_hang/2',{id:1})
+            .post('/xep_hang/2',{id:this.props.idComic})
             .then(res => {
                 console.log('res is ', res.data);
                 if(res.data!=="NULL"){
@@ -90,13 +92,23 @@ class ReactStars extends Component {
                         stars: this.getStars(this.state.value)
                      });
                 }
-                // console.log("hello");
             }
             )
             .catch(err => {
                 console.log('error is ', err);
                 alert("Có lỗi xảy ra!")
+                this.setState({ 
+                    sta_1: 0,
+                    sta_2: 0,
+                    sta_3: 0,
+                    sta_4: 0,
+                    sta_5: 0,
+                    summary: 0,
+                    sum: 0,
+                    stars: this.getStars(this.state.value)
+                 });
             })
+            this.setState({stars: this.getStars(this.state.value)})
     }
     UNSAFE_componentWillUpdate(props, nextState) {
         var z = nextState.sta_1 + 2*nextState.sta_2 + 3*nextState.sta_3 + 4*nextState.sta_4 + 5*nextState.sta_5;
@@ -227,9 +239,9 @@ class ReactStars extends Component {
                     break;
                 default: break;
             }
-            // console.log(this.state.sta_1)
+            console.log(this.props.idComic)
             axios.post('/xep_hang/1', {
-                id: 1, //mac dinh cho truyen so 1
+                id: this.props.idComic, //mac dinh cho truyen so 1
                 star_1: sta1,
                 star_2: sta2,
                 star_3: sta3,
@@ -299,14 +311,14 @@ class ReactStars extends Component {
         } = this.props
 
         return (
-            <span className="badge badge-info">
+            <div style = {{backgroundColor: "rgb(0, 64, 255)",border: "0.5px solid green",width: "auto", height: "100%", marginLeft: "1%",borderRadius: "5px"}}>
                 <div className={className} style={parentStyles}>
                     {this.state.config.half ?
                         this.renderHalfStarStyleElement() : ''}
                     {this.renderStars()}
-                       {this.state.summary} ({this.state.sum} đánh giá!)
+                       <span className = "yellow-text">{this.state.summary}/5.00 ({this.state.sum} đánh giá!) </span>
                 </div>
-            </span>
+            </div>
             // {this.state.summary} ({this.state.sum} đánh giá!)          
         )
     }
@@ -339,4 +351,4 @@ ReactStars.defaultProps = {
         console.log(`Example 3: new value is ${newValue}`)
     }
 };
-export default ReactStars
+export default ReactStars;

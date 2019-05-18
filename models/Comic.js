@@ -18,7 +18,13 @@ const ComicSchema = new Schema({
             chapter : String,
             link : String
         }
-    ]
+    ],
+    comment: [{
+        idcomment:{
+            type: Schema.Types.ObjectId,
+            ref: 'comments'
+        }
+    }]
 });
 
 // Tạo connection: là table như bên mysql

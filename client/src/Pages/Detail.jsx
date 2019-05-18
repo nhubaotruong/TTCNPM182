@@ -4,7 +4,8 @@ import Footer from './Basic/Footer';
 import Body from "./Detail/Body";
 import {sendComic} from "./Functions";
 import axios from 'axios';
-
+import SumComment from "./Comment/SumComment";
+import Rating from "./Rating/Rating";
 class App extends Component {
     constructor(){
 		super();
@@ -26,6 +27,7 @@ class App extends Component {
                 comic : comic
             })
         })
+            
     }
     render() {
         return (
@@ -35,6 +37,7 @@ class App extends Component {
                 <Body comic={this.state.comic}/>
                 </div>
                 <br/>
+                <SumComment comment = {this.state.comic.comment}/>
                 <Footer />
             </div>
       );

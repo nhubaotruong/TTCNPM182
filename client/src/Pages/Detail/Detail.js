@@ -21,7 +21,7 @@ class Detail extends Component {
                         <tr>
                             <td><img id="comicPic" src={this.props.comic.avatar} /></td>
                             <td>
-                                <ComicDetail rating="4/5(10 lượt đánh giá)" 
+                                <ComicDetail idComic={this.props.comic._id} 
                                              author={this.props.comic.author} artist={this.props.comic.artist} 
                                              genre={str_kind1} p
                                              publisher={this.props.comic.company}

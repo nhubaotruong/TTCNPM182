@@ -1,13 +1,11 @@
 import React from 'react';
-
+import Rating from "../Rating/Rating";
 const comicdetail = (props) => {
     return (
         <div className="row">
+            <Rating idComic={props.idComic} key = {props.idComic}></Rating>
+            <br></br>
             <table className="col m12">
-                    <tr>
-                        <td className="col m2">Đánh giá:</td>
-                        <td className="col m10">{props.rating}</td>
-                    </tr><br/>
                     <tr>
                         <td className="col m2">Tác giả:</td>
                         <td className="col m10">{props.author}</td>
