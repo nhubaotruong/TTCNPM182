@@ -47,8 +47,6 @@ export default class readcomic extends Component
                     <ComicBox pic= {data} />
                 )
             }
-
-            
             </div>
             <br/>
             

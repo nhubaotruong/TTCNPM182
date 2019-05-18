@@ -114,7 +114,7 @@ class Add extends Component{
 				</div>
 				</div>
 			</form>
-			<button type="submit" class="btn btn-primary" style={{marginTop:"50px"}}>Xác nhận</button>
+			<a href="/dashboard"><button type="submit" class="btn btn-primary" style={{marginTop:"50px"}}>Xác nhận</button></a>
 			</form>
 		)
 	}

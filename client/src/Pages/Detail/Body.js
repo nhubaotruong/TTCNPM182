@@ -9,7 +9,7 @@ class Body extends Component {
             <div>
                 <Detail comic={this.props.comic}></Detail>
                 <Content comic={this.props.comic}></Content>
-                <ListChapter></ListChapter>
+                <ListChapter comic={this.props.comic}></ListChapter>
             </div>
         );
     }
