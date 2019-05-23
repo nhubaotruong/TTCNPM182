@@ -1,6 +1,10 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
+var ComicSchema =  require("./Comic")
+const comic = mongoose.model("comics",ComicSchema);
+
+
 const UserSchema = new Schema({
     username: {
         type: String 
