@@ -1,9 +1,56 @@
-import React from 'react';
+import React, { Component } from 'react'
 import './stylesign.css';
-import NavBar from '../Basic/NavBar'
+import axios from 'axios';
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
+import { RSA_NO_PADDING } from 'constants';
+class signin extends Component 
+{
 
-const signin = () => {
-    function showpass() {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            username : '',
+            password : ''
+        };
+
+        this.onChange = this.onChange.bind(this)
+        this.onSubmit = this.onSubmit.bind(this)
+    }
+
+    onChange (e) {
+        this.setState({[e.target.name] : e.target.value })
+    }
+
+    onSubmit (e) {
+        e.preventDefault()
+        axios
+            .post('/users/signin',{username : this.state.username , password : this.state.password})
+            .then(res =>{
+                if (res.data == null)
+                {
+                    this.setState({password : ""})
+                    alert("Username hoặc password nhập sai!!!")
+                }
+                else if (res.data)
+                {
+                    localStorage.setItem('User', JSON.stringify(res.data));
+                    window.location = res.data.admin ? "/dashboard" : "/home";
+                }
+                else 
+                {
+                    this.setState({password : ""})
+                    alert("Username hoặc password nhập sai!!!")
+                }
+            })
+            .catch(err =>{
+                alert("Error!!!")
+            })
+    }
+
+
+
+    showpass() {
         var x = document.getElementById("password");
         if (x.type === "password") {
         x.type = "text";
@@ -11,14 +58,21 @@ const signin = () => {
         x.type = "password";
         }
     }
-    function disable_login(){
+
+
+    disable_login(){
         var y = document.getElementById("login");
         y.style.display="none";
     }
+
+
+
+    render()
+    {
     return (
         
-        <div className="container" onLoad={disable_login}>
-            <NavBar/>
+        <div className="container" onLoad={this.disable_login}>
+            
             <div className="all">
             <div className="nav spacein">
                 <nav >
@@ -35,7 +89,10 @@ const signin = () => {
                 <div className="row">
                     <div className="input-field col s12">
                     <i className="material-icons prefix">account_circle</i>
-                    <input id="username" type="text" className="validate" />
+                    <input id="username" type="text" className="validate" 
+                        onChange = {this.onChange}
+                        name = "username"
+                        value = {this.state.username}/>
                     <label htmlFor="username">Username<span className="req">*</span></label>
                     </div>
                 </div>
@@ -43,11 +100,14 @@ const signin = () => {
                 <div className="row">
                         <div className="input-field col s12">
                         <i className="material-icons prefix">security</i>
-                        <input id="password" type="password" className="validate" />
+                        <input id="password" type="password" className="validate" 
+                            onChange= {this.onChange}
+                            name ="password"
+                            value = {this.state.password}/>
                         <label htmlFor="password">Password<span className="req">*</span></label>
                         <p>
                             <label>
-                                <input type="checkbox" onClick={showpass} className="filled-in"/>
+                                <input type="checkbox" onClick={this.showpass} className="filled-in"/>
                                 <span>Show Password</span>
                             </label>
                         </p>
@@ -59,7 +119,7 @@ const signin = () => {
                     
                 
                 <div className="row center-align">
-                    <button className="btn waves-effect waves-light grey darken-3" type="submit" name="action">Sign in
+                    <button className="btn waves-effect waves-light grey darken-3" onClick = {this.onSubmit} name="action">Sign in
                             <i className="material-icons right">send</i>
                     </button>
                 </div>
@@ -73,6 +133,7 @@ const signin = () => {
         </div>
         </div>
     );
+    }
 }
 
 export default signin

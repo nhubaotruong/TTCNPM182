@@ -1,12 +1,16 @@
-const mongoose = require("mongoose");
-
-const Schema = mongoose.Schema;
+const mongoose = require("mongoose")
+const Schema = mongoose.Schema
 
 const UserSchema = new Schema({
-    // type là kiểu dữ kiệu, require nếu là true là bắt buộc phải nhập, còn unique là true là bắt buộc phải khác nhau
-    username: String,
-    password: String,
-    admin: Boolean,
+    username: {
+        type: String 
+    },
+    password: {
+        type: String
+    },
+    admin: {
+        type: Boolean, default: false
+    },
     FavouriteList: [{
         idcomic : {
             type: Schema.Types.ObjectId,
@@ -32,10 +36,8 @@ const UserSchema = new Schema({
             time : Date,
             chap : Number
         }]
-});
+    
+    
+})
 
-// Tạo connection: là table như bên mysql
-// Tạo connection có tên user và dùng schema là UserSchema
-// const User = mongoose.model("user",UserSchema);
-
-module.exports = UserSchema;
+module.exports = user = mongoose.model('users', UserSchema)
