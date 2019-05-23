@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import './stylesign.css';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
-import { RSA_NO_PADDING } from 'constants';
 class signin extends Component 
 {
 

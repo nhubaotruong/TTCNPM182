@@ -206,7 +206,8 @@ comics.post('/readcomic', (req,res) =>{
             {
                 if(req.body.chapter == i.chapterNum)
                 {
-                    res.json(i.link)
+                    console.log(i)
+                    res.json(i)
                     break
                 }
             }

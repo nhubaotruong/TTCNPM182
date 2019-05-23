@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import ComicBox from './ComicBox.jsx';
 import ComicNav from './ComicNav.jsx';
 import axios from 'axios';
@@ -12,16 +11,17 @@ export default class readcomic extends Component
     constructor(props) {
         super(props);
         this.state = {
-            datacomic : []
+            datacomic : [],
+            chapterName : ""
         };
     }
 
 
     componentDidMount(){
         axios
-            .post('/comics/readcomic',{comicName : this.props.comicName, chapter : this.props.chapter})
+            .post('/comics/readcomic',{comicName : this.props.comicName, chapter : this.props.data.chapter})
             .then(res => {
-                this.setState({datacomic : res.data});
+                this.setState({datacomic : res.data.link, chapterName : res.data.chapter});
             })
             .catch(err => {
                 console.log('err is ',err)

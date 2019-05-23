@@ -18,16 +18,23 @@ class Detail extends Component {
                         </tr>   
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><img id="comicPic" src={this.props.comic.avatar} /></td>
-                            <td>
-                                <ComicDetail idComic={this.props.comic._id} 
+                        <tr className="row">
+                            <td className="col m4"><img id="comicPic" src={this.props.comic.avatar} alt="comicPic" /></td>
+                            <td className="col m8">
+                                <table className="striped">
+                                <tr><ComicDetail idComic={this.props.comic._id} 
                                              author={this.props.comic.author} artist={this.props.comic.artist} 
-                                             genre={str_kind1} p
+                                             genre={str_kind1}
                                              publisher={this.props.comic.company}
                                              status="Chưa rõ"/>
+                                </tr>
+                                <tr>
+                                    <a className="btn btn-large grey darken-3 white-text waves-effect waves-light">Thêm vào yêu thích</a>
+                                </tr>
+                                </table>
                             </td>
                         </tr>
+                        
                     </tbody>
                 </table>
                 

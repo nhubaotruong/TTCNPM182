@@ -16,6 +16,7 @@ export default class readcomic extends Component
         this.state = {
             comicName : "",
             chapterNum : 1,
+            chapterName: "",
             datacomic : []
         };
         this.ClickPreviouschapter = this.ClickPreviouschapter.bind(this)
@@ -37,7 +38,7 @@ export default class readcomic extends Component
         axios
             .post('/comics/readcomic',{comicName : comicName, chapter : chapterNum})
             .then(res => {
-                this.setState({datacomic : res.data});
+                this.setState({datacomic : res.data.link,chapterName : res.data.chapter});
             })
             .catch(err => {
                 console.log('err is ',err)
@@ -52,7 +53,7 @@ export default class readcomic extends Component
         axios
             .post('/comics/readcomic',{comicName : this.state.comicName, chapter : this.state.chapterNum})
             .then(res => {
-                this.setState({datacomic : res.data});
+                this.setState({datacomic : res.data.link , chapterName : res.data.chapter});
             })
             .catch(err => {
                 console.log('err is ',err)
@@ -81,9 +82,11 @@ export default class readcomic extends Component
                 <br />
                 <ComicNav 
                     comicName={this.state.comicName} 
-                    chapter={this.state.chapterNum} 
+                    chapterNum={this.state.chapterNum} 
+                    chapterName={this.state.chapterName}
                     onclickprevious = {this.ClickPreviouschapter}
-                    onclicknext = {this.ClickNextchapter}/>
+                    onclicknext = {this.ClickNextchapter}
+                    bottom={false} />
                 <br/><br/>
                 
                 {
@@ -91,6 +94,16 @@ export default class readcomic extends Component
                         <ComicBox pic= {data} />
                     )
                 }
+                <br />
+                <ComicNav 
+                    comicName={this.state.comicName} 
+                    chapterNum={this.state.chapterNum} 
+                    chapterName={this.state.chapterName}
+                    onclickprevious = {this.ClickPreviouschapter}
+                    onclicknext = {this.ClickNextchapter}
+                    bottom={true} />           
+
+                <br />
                 </div>
                 <SumComment ComicName = {this.state.comicName} key = {this.state.comicName}/>
                 <br/>
