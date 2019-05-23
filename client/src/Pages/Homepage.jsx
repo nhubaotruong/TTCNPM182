@@ -31,8 +31,12 @@ class homepage extends Component{
 					});
 				}
 				else{
-					var topComics = []
+                    var topComics = []
+                    comics.sort(function(a, b){
+                        return b.view - a.view;
+                    });
 					for(var i=0;i<4;i++){
+                        console.log(comics[i].view)
 						topComics.push(comics[i]);
 					}
 					this.setState({

@@ -6,12 +6,12 @@ const recentUpload = (props) => {
         <div className="row">
             <div className="col m12 s12">
                 <div className="card hoverable horizontal">
-                    <div className="card-image">
+                    <div className="card-image valign-wrapper">
                         <img src={props.comicPic} alt="tt" style={{width:"200px"}} />
                     </div>
                     <div className="card-stacked">
                         <div className="card-content">
-                            <p>{props.comicDes}</p>
+                            <p style={{textAlign:'justify'}}>{props.comicDes}</p>
                         </div>
                         <div className="card-action right-align">
                             <a href={url}>Read more...</a>

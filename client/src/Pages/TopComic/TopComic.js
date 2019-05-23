@@ -9,7 +9,7 @@ const topComic = (props) => {
                         <div className="card-image">
                             <img src={props.comicPic} alt="tt" width="200px" height="350px"/>
                         </div>
-                        <div className="card-content">
+                        <div className="card-content" style={{padding:'15px'}}>
                             <p>{props.comicName}</p>
                         </div>
                         <div className="card-action">
