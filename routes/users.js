@@ -8,7 +8,6 @@ users.use(cors())
 const user = require("../models/User")
 
 
-
 users.post('/signup', (req,res) =>{
 
 	user.findOne({username : req.body.username})

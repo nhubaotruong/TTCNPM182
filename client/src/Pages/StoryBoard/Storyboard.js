@@ -14,6 +14,7 @@ class Storybroad extends Component
         super(props);
 
         this.state = {
+            username : "",
             Favouritecomics: [],
             Historycomics : [],
             Noticecomics : []
@@ -22,12 +23,16 @@ class Storybroad extends Component
     }
 
     componentDidMount(){
-        
+        this.setState({
+            username : JSON.parse(localStorage.getItem("User")).username
+        })
+        var username = JSON.parse(localStorage.getItem("User")).username
         axios
-            .get('/comics/showFavouriteList',{})
+            .post('/comics/showFavouriteList',{username : username})
             .then(res => {
                 
                 this.setState({ Favouritecomics : res.data});
+                console.log(this.state.Favouritecomics)
                 
             })
             .catch(err => {
@@ -35,7 +40,7 @@ class Storybroad extends Component
             })
 
         axios
-            .get('/comics/showHistory', {})
+            .post('/comics/showHistory', {username : username})
             .then(res => {
                 this.setState({ Historycomics : res.data});
             })
@@ -43,7 +48,7 @@ class Storybroad extends Component
                 console.log('err is ' , err)
             })
         axios
-            .get('/comics/showNotice', {})
+            .post('/comics/showNotice', {username : username})
             .then(res => {
                 this.setState({ Noticecomics : res.data});
             })
@@ -52,36 +57,55 @@ class Storybroad extends Component
             })
     }
 
-    componentWillUpdate() {
-        axios
-            .get('/comics/showFavouriteList' , {})
-            .then(res => {
+    // componentWillUpdate() {
+    //     axios
+    //         .post('/comics/showFavouriteList' , {})
+    //         .then(res => {
                 
-                this.setState({ Favouritecomics : res.data});
-            })
-            .catch(err => {
-                console.log('err is ',err)
-            })
+    //             this.setState({ Favouritecomics : res.data});
+    //         })
+    //         .catch(err => {
+    //             console.log('err is ',err)
+    //         })
 
-        axios
-            .get('/comics/showHistory', {})
-            .then(res => {
-                this.setState({ Historycomics : res.data});
-            })
-            .catch(err => {
-                console.log('err is ' , err)
-            })
+    //     axios
+    //         .get('/comics/showHistory', {})
+    //         .then(res => {
+    //             this.setState({ Historycomics : res.data});
+    //         })
+    //         .catch(err => {
+    //             console.log('err is ' , err)
+    //         })
 
-        axios
-            .get('/comics/showNotice', {})
-            .then(res => {
-                this.setState({ Noticecomics : res.data});
+    //     axios
+    //         .get('/comics/showNotice', {})
+    //         .then(res => {
+    //             this.setState({ Noticecomics : res.data});
+    //         })
+    //         .catch(err => {
+    //             console.log('err is ' , err)
+    //         })
+    // }
+
+    
+    showFavouritecomics = () => {
+        if(this.state.Favouritecomics.length>0){
+            return this.state.Favouritecomics.map((comic) => {
+                return <FavouriteList comicPic = {comic.idcomic.avatar} comicName = {comic.idcomic.comicName} comicID ={comic.idcomic._id}/>
+            }
+    )}}
+    showHistorycomics = () => {
+
+        if(this.state.Historycomics.length == 0){
+            return <div>Không có lịch sử</div>
+        }
+        else {
+            return this.state.Historycomics.map((comic) =>{
+                console.log(comic.avatar)
+                return <HistoryNotice comicPic={comic.idcomic.avatar} comicName = {comic.idcomic.comicName} comicChap= {comic.chap} comicTime = {Moment(comic.time).format("MMMM Do, YYYY H:mma")} comicID = {comic.idcomic} comicHistory = "true"/>
             })
-            .catch(err => {
-                console.log('err is ' , err)
-            })
+        }
     }
-
 	render()
 	{
 
@@ -91,41 +115,28 @@ class Storybroad extends Component
 			<div class="row">
     			<div class="col s12 16">
       				<ul class="tabs">
-        				<li class="tab col s4" >
+        				<li class="tab col s6" >
         	  				<a href="#Favourite" class="waves-effect waves-red black-text" >Favourite List</a>
         				</li>
-        				<li class="tab col s4">
+        				<li class="tab col s6">
         					<a href="#History" class="waves-effect waves-red black-text" >History</a>
         				</li>
-        				<li class="tab col s4">
-        					<a href="#Notice" class="waves-effect waves-red black-text" >Notice</a>
-        				</li>
+        				
       				</ul>
       				<div id="Favourite" class = "row">
                         {   
-                            this.state.Favouritecomics.map((comic) =>
-                            <FavouriteList comicPic = "logo.png" comicName = {comic.idcomic.name} comicID ={comic.idcomic._id}/>
-                        )}
+                            this.showFavouritecomics()
+                        }
 
 					</div>
     				<div id="History">
     					<ul class="collection">
     						{
-                                this.state.Historycomics.map((comic) =>
-                                    <HistoryNotice comicPic="logo.png" comicName = {comic.idcomic.name} comicChap= {comic.chap} comicTime = {Moment(comic.time).format("MMMM Do, YYYY H:mma")} comicID = {comic.idcomic} comicHistory = "true"/>
-                                )   
+                                this.showHistorycomics()
                             }
     					</ul>
     				</div>
-    				<div id="Notice">
-    					<ul class="collection">
-    						{
-                                this.state.Noticecomics.map((comic) =>
-                                    <HistoryNotice comicPic="logo.png" comicName = {comic.idcomic.name} comicChap= {comic.chap} comicTime = {Moment(comic.time).format("MMMM Do, YYYY H:mma")} comicID = {comic.idcomic} comicHistory = "false"/>
-                                )   
-                            }
-    					</ul>
-    				</div>
+    				
     			</div>
     
   			</div>
