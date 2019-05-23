@@ -14,7 +14,8 @@ export default class readcomic extends Component
         this.state = {
             comicName : this.props.comicName,
             chapter : this.props.chapter,
-            datacomic : []
+            datacomic : [],
+         countchapter: 0
         };
         this.ClickPreviouschapter = this.ClickPreviouschapter.bind(this)
         this.ClickNextchapter = this.ClickNextchapter.bind(this)
@@ -30,6 +31,16 @@ export default class readcomic extends Component
             .catch(err => {
                 console.log('err is ',err)
             })
+
+
+        axios.post('/comics/countchapter',{comicName : this.state.comicName})
+            .then(res =>{
+                console.log(typeof(res.data.length))
+                this.setStatcountchapter : res.data.length})
+            })
+            .catch(err =>{
+                alert("Error!!!")
+            })
         
     }
 
@@ -39,11 +50,13 @@ export default class readcomic extends Component
         axios
             .post('/comics/readcomic',{comicName : this.state.comicName, chapter : this.state.chapter})
             .then(res => {
-                this.setState({datacomic : res.data});
+                this.setState({datacomic : res.data})
             })
             .catch(err => {
                 console.log('err is ',err)
             })
+
+        
     }
 
 
@@ -70,7 +83,8 @@ export default class readcomic extends Component
                 comicName={this.state.comicName} 
                 chapter={this.state.chapter} 
                 onclickprevious = {this.ClickPreviouschapter}
-                onclicknext = {this.ClickNextchapter}/>
+                onclicknext = {this.ClickNextchapter}
+             countchapter = {this.stacountchapter}/>
             <br/><br/>
             
             {

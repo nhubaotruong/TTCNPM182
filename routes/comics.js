@@ -101,7 +101,7 @@ comics.post('/insertFavouriteList',(req,res) =>{
         {
             e.FavouriteList.push({"idcomic" : req.body.id})
             user.findOneAndUpdate({"_id" : "5ccdb65ebf4a5a028072c22d"},{$set:{"FavouriteList" : e.FavouriteList}},{new: true}).then(doc => {
-                console.log("insert done")
+                console.log("insertFavouriteList done")
             })
             .catch(err => {
                 console.error(err)
@@ -148,13 +148,13 @@ comics.post('/deleteHistory',(req,res) =>{
             }
             count++
         }
-        console.log(req.body.id)
+        
         user.findOneAndUpdate({"_id" : "5ccdb65ebf4a5a028072c22d"},{$set:{"History" : e.History}},{new: true}).then(doc => {
-    console.log("delete done")
-  })
-  .catch(err => {
-    console.error(err)
-  })
+            console.log("delete done")
+        })
+        .catch(err => {
+            console.error(err)
+        })
         
     })
     .catch(err => {
@@ -162,6 +162,39 @@ comics.post('/deleteHistory',(req,res) =>{
     })
 })
 
+
+
+comics.post('/insertHistory',(req,res) =>{
+    user.findOne({_id : "5ccdb65ebf4a5a028072c22d"})
+    .then(e => {
+        
+        var count = 0
+        for (var i of e.History)
+        {
+            if (i.idcomic == req.body.id && i.chap == req.body.chapter)
+            {
+                e.History.splice(count,1)
+                break
+            }
+            count++
+        }
+
+        e.History.unshift({"idcomic" : req.body.id , "time" : req.body.time, "chap" : req.body.chapter})
+        
+        user.findOneAndUpdate({"_id" : "5ccdb65ebf4a5a028072c22d"},{$set:{"History" : e.History}},{new: true}).then(doc => {
+            console.log("insertHistory done")
+            res.json(true)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+        
+        
+    })
+    .catch(err => {
+        res.send('error : ' + err)
+    })
+})
 
 
 
@@ -212,6 +245,42 @@ comics.post('/deleteNotice',(req,res) =>{
 
 
 
+comics.post('/insertNotice',(req,res) =>{
+    user.findOne({_id : "5ccdb65ebf4a5a028072c22d"})
+    .then(e => {
+        
+        var count = 0
+        for (var i of e.Notice)
+        {
+            if (i.idcomic == req.body.id && i.chap == req.body.chapter)
+            {
+                e.Notice.splice(count,1)
+                break
+            }
+            count++
+        }
+
+        e.Notice.unshift({"idcomic" : req.body.id , "time" : req.body.time, "chap" : req.body.chapter})
+        
+        user.findOneAndUpdate({"_id" : "5ccdb65ebf4a5a028072c22d"},{$set:{"Notice" : e.History}},{new: true}).then(doc => {
+            console.log("insertNotice done")
+            res.json(true)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+        
+        
+    })
+    .catch(err => {
+        res.send('error : ' + err)
+    })
+})
+
+
+
+
+
 comics.post('/readcomic', (req,res) =>{
     
     comic.findOne({name : req.body.comicName})
@@ -226,6 +295,14 @@ comics.post('/readcomic', (req,res) =>{
             }
         })
     
+})
+
+
+comics.post('/countchapter',(req,res) =>{
+    comic.findOne({name : req.body.comicName})
+        .then(e =>{
+            res.json(e.data)
+        })
 })
 
 
