@@ -4,13 +4,17 @@ import axios from 'axios'
 export default class HistoryNotice extends Component
 {
 
-	handleClick_deleteHistory (e,f) {
+  constructor(props) {
+        super(props);
+        this.handleClick_deleteHistory = this.handleClick_deleteHistory.bind(this);
+      }
+
+	handleClick_deleteHistory (e) {
     e.preventDefault()
-    console.log(f);
     if (this.props.comicHistory == "true")
     {
     axios
-      .post('/comics/deleteHistory', {id : f})
+      .post('/comics/deleteHistory', {id : this.props.comicID, username : this.props.username})
       .then(r => {console.log(r.data)})
       .catch(err => {
         console.error(err)
@@ -18,7 +22,7 @@ export default class HistoryNotice extends Component
   	}
   	else {
   		axios
-      		.post('/comics/deleteNotice', {id : f})
+      		.post('/comics/deleteNotice', {id : this.props.comicID, username : this.props.username})
       		.then(r => {console.log(r.data)})
       		.catch(err => {
         console.error(err)
@@ -45,7 +49,7 @@ export default class HistoryNotice extends Component
       		
       		<span class="title ">{this.props.comicName}</span>
       		<p>Chapter {this.props.comicChap}</p>
-      		<a href="#!" class="secondary-content btn-floating halfway-fab waves-effect waves-light red" onClick={e => this.handleClick_deleteHistory(e,this.props.comicID)}>
+      		<a href="#!" class="secondary-content btn-floating halfway-fab waves-effect waves-light red" onClick={e => this.handleClick_deleteHistory(e)}>
       			<i class=" center material-icons">close</i>
       		</a>
     	</li>

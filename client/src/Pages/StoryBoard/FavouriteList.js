@@ -3,13 +3,15 @@ import axios from 'axios';
 
 
 export default class FavouriteList extends Component {
+  constructor(props) {
+        super(props);
+        this.handleClick_deleteFavourite = this.handleClick_deleteFavourite.bind(this);
+      }
 
-
-  handleClick_deleteFavourite (e,f) {
+  handleClick_deleteFavourite (e) {
     e.preventDefault()
-    console.log(typeof(f));
     axios
-      .post('/comics/deleteFavouriteList', {id : f})
+      .post('/comics/deleteFavouriteList', {id : this.props.comicID,username : this.props.username})
       .then(r => {console.log(r.data)})
       .catch(err => {
         console.error(err)
@@ -24,7 +26,7 @@ export default class FavouriteList extends Component {
       <div class="card hoverable">
         <div class="card-image">
           <img src={this.props.comicPic}/>
-          <button class="btn-floating halfway-fab waves-effect waves-light red " onClick={e => this.handleClick_deleteFavourite(e,this.props.comicID)}>
+          <button class="btn-floating halfway-fab waves-effect waves-light red " onClick={e => this.handleClick_deleteFavourite(e)}>
             <i class=" center material-icons">close</i>
           </button>
         </div>

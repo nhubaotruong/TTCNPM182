@@ -16,7 +16,8 @@ const readcomic = (props) => {
                     {(!props.bottom) ?<h3 style={{marginTop:'0', marginBottom:'0'}}>{props.comicName}</h3> : ""}
                 </div>
                 <div className="col m4">
-                    <button className="btn btn-flat grey darken-3 white-text" onClick = {()=>{props.onclicknext();jumpToTop()}}>Next chapter</button>
+                    {(props.chapterNum < props.countchapter)?<button className="btn btn-flat grey darken-3 white-text" onClick = {()=>{props.onclicknext();jumpToTop()}}>Next chapter</button>:""}
+
                 </div>
             </div>
             <div className="center-align"><h5>Chapter {props.chapterNum}</h5></div>
