@@ -20,6 +20,7 @@ export default class FavouriteList extends Component {
   }
 
   render() {
+    var url = "/detail" + "?" + "c=" + this.props.comicName;
 	return (
 		<div >
     <div class="col m3 s12" >
@@ -33,6 +34,9 @@ export default class FavouriteList extends Component {
         <div class="card-content">
           <span class="card-title black-text text-darken-2 b">{this.props.comicName}</span>
           
+        </div>
+        <div className="card-action">
+          <a href={url}>Read more ...</a>
         </div>
       </div>
     </div>
