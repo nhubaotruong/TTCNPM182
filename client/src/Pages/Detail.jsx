@@ -37,7 +37,7 @@ class App extends Component {
                 <Body comic={this.state.comic}/>
                 </div>
                 <br/>
-                <SumComment ComicName = {this.state.comic.comicName} key = {this.state.comic.comicName}/>
+                <SumComment ComicName = {this.state.comic.comicName} key = {this.state.comic.comicName} />
                 <Footer />0
             </div>
       );

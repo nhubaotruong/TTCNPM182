@@ -26,13 +26,43 @@ class Storybroad extends Component
         this.setState({
             username : JSON.parse(localStorage.getItem("User")).username
         })
-        var username = JSON.parse(localStorage.getItem("User")).username
+        // var username = JSON.parse(localStorage.getItem("User")).username
+        // axios
+        //     .post('/comics/showFavouriteList',{username : username})
+        //     .then(res => {
+                
+        //         this.setState({ Favouritecomics : res.data});
+                
+        //     })
+        //     .catch(err => {
+        //         console.log('err is ',err)
+        //     })
+
+        // axios
+        //     .post('/comics/showHistory', {username : username})
+        //     .then(res => {
+        //         this.setState({ Historycomics : res.data});
+        //     })
+        //     .catch(err => {
+        //         console.log('err is ' , err)
+        //     })
+        // axios
+        //     .post('/comics/showNotice', {username : username})
+        //     .then(res => {
+        //         this.setState({ Noticecomics : res.data});
+        //     })
+        //     .catch(err => {
+        //         console.log('err is ' , err)
+        //     })
+    }
+
+    componentDidUpdate() {
+        // var username = JSON.parse(localStorage.getItem("User")).username
         axios
-            .post('/comics/showFavouriteList',{username : username})
+            .post('/comics/showFavouriteList',{username : this.state.username})
             .then(res => {
                 
                 this.setState({ Favouritecomics : res.data});
-                console.log(this.state.Favouritecomics)
                 
             })
             .catch(err => {
@@ -40,58 +70,33 @@ class Storybroad extends Component
             })
 
         axios
-            .post('/comics/showHistory', {username : username})
+            .post('/comics/showHistory', {username :  this.state.username})
             .then(res => {
                 this.setState({ Historycomics : res.data});
             })
             .catch(err => {
                 console.log('err is ' , err)
             })
-        axios
-            .post('/comics/showNotice', {username : username})
-            .then(res => {
-                this.setState({ Noticecomics : res.data});
-            })
-            .catch(err => {
-                console.log('err is ' , err)
-            })
+        // axios
+        //     .post('/comics/showNotice', {username :  this.state.username})
+        //     .then(res => {
+        //         this.setState({ Noticecomics : res.data});
+        //     })
+        //     .catch(err => {
+        //         console.log('err is ' , err)
+        //     })
     }
-
-    // componentWillUpdate() {
-    //     axios
-    //         .post('/comics/showFavouriteList' , {})
-    //         .then(res => {
-                
-    //             this.setState({ Favouritecomics : res.data});
-    //         })
-    //         .catch(err => {
-    //             console.log('err is ',err)
-    //         })
-
-    //     axios
-    //         .get('/comics/showHistory', {})
-    //         .then(res => {
-    //             this.setState({ Historycomics : res.data});
-    //         })
-    //         .catch(err => {
-    //             console.log('err is ' , err)
-    //         })
-
-    //     axios
-    //         .get('/comics/showNotice', {})
-    //         .then(res => {
-    //             this.setState({ Noticecomics : res.data});
-    //         })
-    //         .catch(err => {
-    //             console.log('err is ' , err)
-    //         })
-    // }
 
     
     showFavouritecomics = () => {
-        if(this.state.Favouritecomics.length>0){
+        if(this.state.Favouritecomics.length == 0)
+        {
+            return <div>Danh sách ưu thích trống</div>
+        }
+        else{
+
             return this.state.Favouritecomics.map((comic) => {
-                return <FavouriteList comicPic = {comic.idcomic.avatar} comicName = {comic.idcomic.comicName} comicID ={comic.idcomic._id}/>
+                return <FavouriteList comicPic = {comic.idcomic.avatar} comicName = {comic.idcomic.comicName} comicID ={comic.idcomic._id} username = {this.state.username}/>
             }
     )}}
     showHistorycomics = () => {
@@ -101,8 +106,7 @@ class Storybroad extends Component
         }
         else {
             return this.state.Historycomics.map((comic) =>{
-                console.log(comic.avatar)
-                return <HistoryNotice comicPic={comic.idcomic.avatar} comicName = {comic.idcomic.comicName} comicChap= {comic.chap} comicTime = {Moment(comic.time).format("MMMM Do, YYYY H:mma")} comicID = {comic.idcomic} comicHistory = "true"/>
+                return <HistoryNotice comicPic={comic.idcomic.avatar} comicName = {comic.idcomic.comicName} comicChap= {comic.chap} comicTime = {Moment(comic.time).format("MMMM Do, YYYY H:mma")} comicID = {comic.idcomic} comicHistory = "true" username = {this.state.username}/>
             })
         }
     }
