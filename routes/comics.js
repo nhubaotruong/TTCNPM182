@@ -3,6 +3,7 @@ const express = require("express")
 const comics = express.Router()
 const cors = require("cors")
 const mongoose = require("mongoose");
+mongoose.set('useFindAndModify', false);
 // const jwt = require("jsonwebtoken")
 // const bcrypt = require("bcrypt")
 
@@ -33,34 +34,16 @@ comics.post('/showFavouriteList',(req,res) => {
 
 
 
-// comics.get('/showFavouriteList',(req,res) => {
-//     user.find({_id : "5ccdb65ebf4a5a028072c22d"})
-//     .then(e => {
-        
-//         // console.log(typeof(req.body.id))
-//         var id_comics = []
-//         for (var i of e[0].FavouriteList)
-//         {
-//             id_comics.push({"_id" : i})
-//         }
-//         comic.find({ $or :id_comics })
-//             .then(f => res.json(f))
-        
-//     })
-//     .catch(err => {
-//         res.send('error : ' + err)
-//     })
-// })
 
 
 
 
 
 comics.post('/deleteFavouriteList',(req,res) =>{
-    // const id_comic_delete = {id : rep.body.id}
+    // console.log("begin");
     user.findOne({username : req.body.username})
     .then(e => {
-        
+        // console.log("begin find");
         var count = 0
         for (var i of e.FavouriteList)
         {
@@ -71,8 +54,9 @@ comics.post('/deleteFavouriteList',(req,res) =>{
             }
             count++
         }
+        // console.log("count done");
         user.findOneAndUpdate({username : req.body.username},{$set:{"FavouriteList" : e.FavouriteList}},{new: true}).then(doc => {
-    console.log("delete done")
+        res.json(true)
   })
   .catch(err => {
     console.error(err)
@@ -122,6 +106,27 @@ comics.post('/insertFavouriteList',(req,res) =>{
 
 
 
+comics.post('/checkaddFavouriteList',(req,res) => {
+    user.findOne({username : req.body.username},"FavouriteList").populate("FavouriteList.idcomic")
+        .then(e => {
+            var result = true
+            for (var i of e.FavouriteList)
+            {
+                if (i.idcomic.comicName == req.body.comicName)
+                {
+                    result = false
+                    break
+                }
+            }
+            console.log(req.body.id);
+            res.json(result)
+        })
+        .catch(err => {
+            res.json("error")
+        })
+})
+
+
 
 comics.post('/showHistory',(req,res) => {
     user.findOne({username : req.body.username}).populate('History.idcomic')
@@ -169,29 +174,37 @@ comics.post('/deleteHistory',(req,res) =>{
 
 
 comics.post('/insertHistory',(req,res) =>{
-    user.findOne({username : req.body.username})
+    user.findOne({username : req.body.username},"History").populate("History.idcomic")
     .then(e => {
         
         var count = 0
+        
         for (var i of e.History)
         {
-            if (i.idcomic == req.body.id && i.chap == req.body.chapter)
+            if (i.idcomic.comicName == req.body.comicName && i.chap == req.body.chapter)
             {
                 e.History.splice(count,1)
+
                 break
             }
             count++
         }
+        Comic.findOne({comicName: req.body.comicName})
+            .then (f => {
+                e.History.unshift({"idcomic" : f._id , "time" : req.body.time, "chap" : req.body.chapter})
 
-        e.History.unshift({"idcomic" : req.body.id , "time" : req.body.time, "chap" : req.body.chapter})
+                
+
+                user.findOneAndUpdate({username : req.body.username},{$set:{"History" : e.History}},{new: true}).then(doc => {
+                        console.log("insertHistory done")
+                        res.json(true)
+                    })
+                    .catch(err => {
+                        console.error(err)
+                    })
+
+            })
         
-        user.findOneAndUpdate({username : req.body.username},{$set:{"History" : e.History}},{new: true}).then(doc => {
-            console.log("insertHistory done")
-            res.json(true)
-        })
-        .catch(err => {
-            console.error(err)
-        })
         
         
     })
@@ -317,13 +330,24 @@ comics.post('/readcomic', (req,res) =>{
             {
                 if(req.body.chapter == i.chapterNum)
                 {
-                    console.log(i)
                     res.json(i)
                     break
                 }
             }
         })
     
+})
+
+
+
+comics.post('/countchapter',(req,res) =>{
+    console.log("sadfsadf");
+    console.log(req.body.comicName);
+    Comic.findOne({comicName : req.body.comicName})
+        .then(e =>{
+            console.log(e);
+            res.json(e.data)
+        })
 })
 
 
