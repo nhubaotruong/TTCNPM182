@@ -31,12 +31,17 @@ class homepage extends Component{
 					});
 				}
 				else{
+<<<<<<< HEAD
                     var topComics = []
                     comics.sort(function(a, b){
                         return b.view - a.view;
                     });
 					for(var i=0;i<4;i++){
                         console.log(comics[i].view)
+=======
+					var topComics = []
+					for(var i=0;i<4;i++){
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 						topComics.push(comics[i]);
 					}
 					this.setState({

@@ -37,7 +37,11 @@ class App extends Component {
                 <Body comic={this.state.comic}/>
                 </div>
                 <br/>
+<<<<<<< HEAD
                 <SumComment ComicName = {this.state.comic.comicName} key = {this.state.comic.comicName} />
+=======
+                <SumComment ComicName = {this.state.comic.comicName} key = {this.state.comic.comicName}/>
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                 <Footer />0
             </div>
       );

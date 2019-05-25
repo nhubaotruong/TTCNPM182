@@ -6,7 +6,10 @@ export default class CommentForm extends Component {
     this.state = {
       loading: false,
       error: "",
+<<<<<<< HEAD
       username: "",
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
       comment: {
         name: "",
         message: "",
@@ -14,9 +17,15 @@ export default class CommentForm extends Component {
         reply:[]
       },
       reply_:{
+<<<<<<< HEAD
         name: "",
         message: "",
         time: "",
+=======
+        name:"",
+        message: "",
+        time:"",
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         replyto: ""
       }
     };
@@ -28,9 +37,12 @@ export default class CommentForm extends Component {
 
 
   componentDidMount(){
+<<<<<<< HEAD
     if(JSON.parse(localStorage.getItem("User")) != null){
       this.setState({username: JSON.parse(localStorage.getItem("User")).username})
     }
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     this.setState({reply_:{replyto: this.props.replyTo}})
   }
   /**
@@ -48,8 +60,12 @@ export default class CommentForm extends Component {
         ...this.state.comment,
         [name]: value,
         time: dates,
+<<<<<<< HEAD
         reply:[],
         name: this.state.username
+=======
+        reply:[]
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
       }
     });}
     if(this.props.type_ === "Reply"){
@@ -60,9 +76,15 @@ export default class CommentForm extends Component {
           ...this.state.reply_,
           [name]: value,
           time: dates,
+<<<<<<< HEAD
           name: this.state.username
         }
       });}
+=======
+        }
+      });
+    }
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     // if(localStorage.length){
     //   this.setState({comment:{
     //     message: "@" + localStorage.getItem("key") + "|     "+ this.state.comment.message,
@@ -77,8 +99,12 @@ export default class CommentForm extends Component {
   onSubmit(e) {
     // prevent default form submission
     e.preventDefault();
+<<<<<<< HEAD
     console.log(this.state.reply_)
     // localStorage.clear();
+=======
+    localStorage.clear();
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     if (!this.isFormValid()) {
       this.setState({ error: "Cần điền hết tất cả các mục"});
       return;
@@ -171,7 +197,10 @@ export default class CommentForm extends Component {
       return (
         <React.Fragment>
           <form method="post" onSubmit={this.onSubmit} style = {{backgroundColor: "#e1f5fe",border: "2px solid #d4e157",width: "auto", height: "100%",borderRadius: "5px"}}>
+<<<<<<< HEAD
             { this.state.username == "" ?
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
             <div className="input-field">
             <i class="material-icons prefix">account_circle</i>
               <input
@@ -183,7 +212,10 @@ export default class CommentForm extends Component {
                 type="text"
               />
             </div>
+<<<<<<< HEAD
             : ""}
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
             <div className="input-field">
             <i className="material-icons prefix">mode_edit</i>
               <textarea className="materialize-textarea"

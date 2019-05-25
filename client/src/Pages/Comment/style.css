@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 
+=======
+div {
+    width: 100%;
+}
+div.c {
+    word-wrap: break-word;
+}
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 /* The alert message box */
 .alert-warn{
     padding: 20px;

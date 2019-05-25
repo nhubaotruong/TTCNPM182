@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "./Detail.css";
 import ComicDetail from './ComicDetail';
+<<<<<<< HEAD
 import axios from 'axios';
 
 
@@ -99,6 +100,9 @@ export default class Detail extends Component {
     }
 
 
+=======
+class Detail extends Component {
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     render() {
         var kind = this.props.comic.kind;
         var str_kind = "";
@@ -115,6 +119,7 @@ export default class Detail extends Component {
                         </tr>   
                     </thead>
                     <tbody>
+<<<<<<< HEAD
                         <tr className="row">
                             <td className="col m4"><img id="comicPic" src={this.props.comic.avatar} alt="comicPic" /></td>
                             <td className="col m8">
@@ -136,6 +141,18 @@ export default class Detail extends Component {
                             </td>
                         </tr>
                         
+=======
+                        <tr>
+                            <td><img id="comicPic" src={this.props.comic.avatar} /></td>
+                            <td>
+                                <ComicDetail idComic={this.props.comic._id} 
+                                             author={this.props.comic.author} artist={this.props.comic.artist} 
+                                             genre={str_kind1} p
+                                             publisher={this.props.comic.company}
+                                             status="Chưa rõ"/>
+                            </td>
+                        </tr>
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                     </tbody>
                 </table>
                 
@@ -145,4 +162,8 @@ export default class Detail extends Component {
     }
 }
 
+<<<<<<< HEAD
 
+=======
+export default Detail;
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433

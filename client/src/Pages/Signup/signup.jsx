@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react'
 import './stylesign.css';
 import axios from 'axios';
@@ -68,6 +69,14 @@ class signup extends Component
 
 
     showpass() {
+=======
+import React from 'react';
+import './stylesign.css';
+import NavBar from '../Basic/NavBar'
+
+const signup = () => {
+    function showpass() {
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         var x = document.getElementById("password");
         if (x.type === "password") {
         x.type = "text";
@@ -75,6 +84,7 @@ class signup extends Component
         x.type = "password";
         }
     }
+<<<<<<< HEAD
     disable_login(){
         var y = document.getElementById("login");
         y.style.display="none";
@@ -85,6 +95,15 @@ class signup extends Component
     return (
         <div className="container" onLoad={this.disable_login}>
             
+=======
+    function disable_login(){
+        var y = document.getElementById("login");
+        y.style.display="none";
+    }
+    return (
+        <div className="container" onLoad={disable_login}>
+            <NavBar/>
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         <div class="all">
             <div class="nav">
                 <nav>
@@ -100,6 +119,7 @@ class signup extends Component
                 <form class="col s12 m12">
 
                 <div class="row">
+<<<<<<< HEAD
                     <div class="input-field col s12 m12">
                     <i class="material-icons prefix">account_circle</i>
                     <input id="icon_prefix" type="text" class="validate" 
@@ -109,11 +129,23 @@ class signup extends Component
                     <label htmlFor="icon_prefix">Username<span class="req">*</span></label>
                     </div>
                     
+=======
+                    <div class="input-field col s6 m6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="icon_prefix" type="text" class="validate" />
+                    <label htmlFor="icon_prefix">First Name<span class="req">*</span></label>
+                    </div>
+                    <div class="input-field col s6 m6">
+                    <input id="icon_telephone" type="tel" class="validate" />
+                    <label htmlFor="icon_telephone">Last Name<span class="req">*</span></label>
+                    </div>
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12 m12">
                         <i class="material-icons prefix">security</i>
+<<<<<<< HEAD
                         <input id="password" type="password" class="validate" 
                             onChange = {this.onChange}
                             name = "password"
@@ -122,6 +154,13 @@ class signup extends Component
                         <p>
                             <label>
                                 <input type="checkbox" onClick={this.showpass} class="filled-in"/>
+=======
+                        <input id="password" type="password" class="validate" />
+                        <label htmlFor="password">Password<span class="req">*</span></label>
+                        <p>
+                            <label>
+                                <input type="checkbox" onClick={showpass} class="filled-in"/>
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                                 <span>Show Password</span>
                             </label>
                         </p>
@@ -130,6 +169,7 @@ class signup extends Component
 
                 <div class="row">
                     <div class="input-field col s12 m12">
+<<<<<<< HEAD
                         <i class="material-icons prefix">security</i>
                         <input id="verfiactionpassword" type="password" class="validate" 
                             onChange = {this.onChange}
@@ -145,12 +185,35 @@ class signup extends Component
                 
                 <div class="row center-align">
                     <button class="btn waves-effect waves-light grey darken-3" onClick = {this.onSubmit} name="action">Sign up
+=======
+                    <i class="material-icons prefix">phone</i>
+                    <input id="icon_telephone" type="tel" class="validate" />
+                    <label htmlFor="icon_telephone">Telephone</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 m12">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input id="username" type="text" class="validate" />
+                    <label htmlFor="username">Username<span class="req">*</span></label>
+                    </div>
+                </div>
+
+                
+                <div class="row center-align">
+                    <button class="btn waves-effect waves-light grey darken-3" type="submit" name="action">Sign up
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
                 <div class="row center-align"> 
                     <p>Have an account already? </p>
+<<<<<<< HEAD
                     <a href="/signin"> Sign in here! </a>
+=======
+                    <a href="./signin"> Sign in here! </a>
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                 </div>  
                 </form>
                 </div>
@@ -158,7 +221,10 @@ class signup extends Component
         </div>
         </div>
     );
+<<<<<<< HEAD
     }
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 }
 
 export default signup;

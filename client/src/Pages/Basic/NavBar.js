@@ -1,11 +1,15 @@
 import React,{Component} from 'react';
+<<<<<<< HEAD
 import M from 'materialize-css/dist/js/materialize.min.js';
 import './s.css';
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 
 class navbar extends Component{
 	constructor(){
 		super();
 		this.state = {
+<<<<<<< HEAD
       comicName : " ",
       username : ""
 		}
@@ -21,10 +25,17 @@ class navbar extends Component{
   //   })
   // }
 
+=======
+			comicName : " "
+		}
+		this.onChange = this.onChange.bind(this);
+	}
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 	onChange(e){
 		this.setState({
 			[e.target.name] : e.target.value
 		})
+<<<<<<< HEAD
   }
   
   LogOut(e){
@@ -74,6 +85,11 @@ class navbar extends Component{
 
     
 
+=======
+	}
+	render(){
+    var url = "/search" + "?" + "c=" + this.state.comicName;
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     return (
       <nav className='grey darken-3'>
           <div className='brand-logo'>
@@ -83,6 +99,7 @@ class navbar extends Component{
             </ul>
             </div>
             <ul className='right'>
+<<<<<<< HEAD
               <li>
                 {localStorage.User ? userlink : signinsignuplink}
               </li>
@@ -127,4 +144,17 @@ document.addEventListener('DOMContentLoaded', function() {
   var elems = document.querySelectorAll('select');
   var instances = M.FormSelect.init(elems, {});
 });
+=======
+              <li><a href='./signin' id="login">Login</a></li>
+              <li>
+              <ul>
+                <li><input type="search" results="5" autoSave="some_unique_value" name="comicName" autoComplete="off" onChange={this.onChange} aria-label="Search box" placeholder=" Search..." className="white-text"/></li>
+                <li><a href={url}><i className="material-icons search-icon">search</i></a></li>
+              </ul> 
+              </li>
+            </ul>
+      </nav>);
+	}
+}
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 export default navbar;

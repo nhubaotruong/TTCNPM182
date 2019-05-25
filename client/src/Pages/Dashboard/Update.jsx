@@ -1,4 +1,8 @@
 import React,{Component} from 'react';
+<<<<<<< HEAD
+=======
+import 'materialize-css/dist/css/materialize.min.css'
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 import M from 'materialize-css/dist/js/materialize.min.js'
 import { PromiseProvider } from 'mongoose';
 import {addComic} from "./Functions";

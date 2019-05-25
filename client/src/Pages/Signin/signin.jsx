@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react'
 import './stylesign.css';
 import axios from 'axios';
@@ -49,6 +50,14 @@ class signin extends Component
 
 
     showpass() {
+=======
+import React from 'react';
+import './stylesign.css';
+import NavBar from '../Basic/NavBar'
+
+const signin = () => {
+    function showpass() {
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         var x = document.getElementById("password");
         if (x.type === "password") {
         x.type = "text";
@@ -56,6 +65,7 @@ class signin extends Component
         x.type = "password";
         }
     }
+<<<<<<< HEAD
 
 
     disable_login(){
@@ -71,6 +81,16 @@ class signin extends Component
         
         <div className="container" onLoad={this.disable_login}>
             
+=======
+    function disable_login(){
+        var y = document.getElementById("login");
+        y.style.display="none";
+    }
+    return (
+        
+        <div className="container" onLoad={disable_login}>
+            <NavBar/>
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
             <div className="all">
             <div className="nav spacein">
                 <nav >
@@ -87,10 +107,14 @@ class signin extends Component
                 <div className="row">
                     <div className="input-field col s12">
                     <i className="material-icons prefix">account_circle</i>
+<<<<<<< HEAD
                     <input id="username" type="text" className="validate" 
                         onChange = {this.onChange}
                         name = "username"
                         value = {this.state.username}/>
+=======
+                    <input id="username" type="text" className="validate" />
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                     <label htmlFor="username">Username<span className="req">*</span></label>
                     </div>
                 </div>
@@ -98,6 +122,7 @@ class signin extends Component
                 <div className="row">
                         <div className="input-field col s12">
                         <i className="material-icons prefix">security</i>
+<<<<<<< HEAD
                         <input id="password" type="password" className="validate" 
                             onChange= {this.onChange}
                             name ="password"
@@ -106,6 +131,13 @@ class signin extends Component
                         <p>
                             <label>
                                 <input type="checkbox" onClick={this.showpass} className="filled-in"/>
+=======
+                        <input id="password" type="password" className="validate" />
+                        <label htmlFor="password">Password<span className="req">*</span></label>
+                        <p>
+                            <label>
+                                <input type="checkbox" onClick={showpass} className="filled-in"/>
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                                 <span>Show Password</span>
                             </label>
                         </p>
@@ -117,7 +149,11 @@ class signin extends Component
                     
                 
                 <div className="row center-align">
+<<<<<<< HEAD
                     <button className="btn waves-effect waves-light grey darken-3" onClick = {this.onSubmit} name="action">Sign in
+=======
+                    <button className="btn waves-effect waves-light grey darken-3" type="submit" name="action">Sign in
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                             <i className="material-icons right">send</i>
                     </button>
                 </div>
@@ -131,7 +167,10 @@ class signin extends Component
         </div>
         </div>
     );
+<<<<<<< HEAD
     }
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 }
 
 export default signin

@@ -1,5 +1,11 @@
 import React,{Component} from 'react';
+<<<<<<< HEAD
 import M from 'materialize-css/dist/js/materialize.min.js'
+=======
+import 'materialize-css/dist/css/materialize.min.css'
+import M from 'materialize-css/dist/js/materialize.min.js'
+import MaterialIcon, {colorPalette} from 'material-icons-react';
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 import axios from 'axios';
 import RecentUpload from "./RecentUpload";
 

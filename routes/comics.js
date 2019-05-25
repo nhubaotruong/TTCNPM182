@@ -3,7 +3,10 @@ const express = require("express")
 const comics = express.Router()
 const cors = require("cors")
 const mongoose = require("mongoose");
+<<<<<<< HEAD
 mongoose.set('useFindAndModify', false);
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 // const jwt = require("jsonwebtoken")
 // const bcrypt = require("bcrypt")
 
@@ -13,10 +16,15 @@ comics.use(cors())
 const user = require("../models/User")
 
 
+<<<<<<< HEAD
+=======
+// "5ccdb65ebf4a5a028072c22d" : id cua user trong database
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 
 
 
 
+<<<<<<< HEAD
 // 5ce6366618b530385486e34b
 
 comics.post('/showFavouriteList',(req,res) => {
@@ -24,6 +32,12 @@ comics.post('/showFavouriteList',(req,res) => {
     user.findOne({username : req.body.username},"FavouriteList").populate("FavouriteList.idcomic")
     .then(e => {
         // console.log(e.FavouriteList)
+=======
+comics.get('/showFavouriteList',(req,res) => {
+    user.findOne({_id : "5ccdb65ebf4a5a028072c22d"},"FavouriteList").populate("FavouriteList.idcomic")
+    .then(e => {
+        
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         res.json(e.FavouriteList)
         
     })
@@ -33,6 +47,7 @@ comics.post('/showFavouriteList',(req,res) => {
 })
 
 
+<<<<<<< HEAD
 comics.post('/deleteFavourite',(req,res) =>{
     // console.log("begin");
     user.findOne({username : req.body.username})
@@ -56,6 +71,21 @@ comics.post('/deleteFavourite',(req,res) =>{
   .catch(err => {
     console.error(err)
   })
+=======
+
+comics.get('/showFavouriteList',(req,res) => {
+    user.find({_id : "5ccdb65ebf4a5a028072c22d"})
+    .then(e => {
+        
+        // console.log(typeof(req.body.id))
+        var id_comics = []
+        for (var i of e[0].FavouriteList)
+        {
+            id_comics.push({"_id" : i})
+        }
+        comic.find({ $or :id_comics })
+            .then(f => res.json(f))
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         
     })
     .catch(err => {
@@ -68,10 +98,17 @@ comics.post('/deleteFavourite',(req,res) =>{
 
 
 comics.post('/deleteFavouriteList',(req,res) =>{
+<<<<<<< HEAD
     // console.log("begin");
     user.findOne({username : req.body.username})
     .then(e => {
         // console.log("begin find");
+=======
+    // const id_comic_delete = {id : rep.body.id}
+    user.findOne({_id : "5ccdb65ebf4a5a028072c22d"})
+    .then(e => {
+        
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         var count = 0
         for (var i of e.FavouriteList)
         {
@@ -82,9 +119,14 @@ comics.post('/deleteFavouriteList',(req,res) =>{
             }
             count++
         }
+<<<<<<< HEAD
         // console.log("count done");
         user.findOneAndUpdate({username : req.body.username},{$set:{"FavouriteList" : e.FavouriteList}},{new: true}).then(doc => {
         res.json(true)
+=======
+        user.findOneAndUpdate({"_id" : "5ccdb65ebf4a5a028072c22d"},{$set:{"FavouriteList" : e.FavouriteList}},{new: true}).then(doc => {
+    console.log("delete done")
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
   })
   .catch(err => {
     console.error(err)
@@ -97,6 +139,7 @@ comics.post('/deleteFavouriteList',(req,res) =>{
 })
 
 
+<<<<<<< HEAD
 
 comics.post('/insertFavouriteList',(req,res) =>{
     // const id_comic_delete = {id : rep.body.id}
@@ -158,6 +201,10 @@ comics.post('/checkaddFavouriteList',(req,res) => {
 
 comics.post('/showHistory',(req,res) => {
     user.findOne({username : req.body.username}).populate('History.idcomic')
+=======
+comics.get('/showHistory',(req,res) => {
+    user.findOne({_id : "5ccdb65ebf4a5a028072c22d"}).populate('History.idcomic')
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         .then(e => {
         
         res.json(e.History)
@@ -172,7 +219,11 @@ comics.post('/showHistory',(req,res) => {
 
 
 comics.post('/deleteHistory',(req,res) =>{
+<<<<<<< HEAD
     user.findOne({username : req.body.username})
+=======
+    user.findOne({_id : "5ccdb65ebf4a5a028072c22d"})
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     .then(e => {
         
         var count = 0
@@ -185,6 +236,7 @@ comics.post('/deleteHistory',(req,res) =>{
             }
             count++
         }
+<<<<<<< HEAD
         
         user.findOneAndUpdate({username : req.body.username},{$set:{"History" : e.History}},{new: true}).then(doc => {
             console.log("delete done")
@@ -234,6 +286,15 @@ comics.post('/insertHistory',(req,res) =>{
             })
         
         
+=======
+        console.log(req.body.id)
+        user.findOneAndUpdate({"_id" : "5ccdb65ebf4a5a028072c22d"},{$set:{"History" : e.History}},{new: true}).then(doc => {
+    console.log("delete done")
+  })
+  .catch(err => {
+    console.error(err)
+  })
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         
     })
     .catch(err => {
@@ -243,10 +304,15 @@ comics.post('/insertHistory',(req,res) =>{
 
 
 
+<<<<<<< HEAD
 
 
 comics.post('/showNotice',(req,res) => {
     user.findOne({username : req.body.username}).populate('Notice.idcomic')
+=======
+comics.get('/showNotice',(req,res) => {
+    user.findOne({_id : "5ccdb65ebf4a5a028072c22d"}).populate('Notice.idcomic')
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         .then(e => {
         
         res.json(e.Notice)
@@ -261,7 +327,11 @@ comics.post('/showNotice',(req,res) => {
 
 
 comics.post('/deleteNotice',(req,res) =>{
+<<<<<<< HEAD
     user.findOne({username : req.body.username})
+=======
+    user.findOne({_id : "5ccdb65ebf4a5a028072c22d"})
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     .then(e => {
         
         var count = 0
@@ -275,7 +345,11 @@ comics.post('/deleteNotice',(req,res) =>{
             count++
         }
         console.log(req.body.id)
+<<<<<<< HEAD
         user.findOneAndUpdate({username : req.body.username},{$set:{"Notice" : e.Notice}},{new: true}).then(doc => {
+=======
+        user.findOneAndUpdate({"_id" : "5ccdb65ebf4a5a028072c22d"},{$set:{"Notice" : e.Notice}},{new: true}).then(doc => {
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     console.log("delete done")
   })
   .catch(err => {
@@ -288,6 +362,7 @@ comics.post('/deleteNotice',(req,res) =>{
     })
 })
 
+<<<<<<< HEAD
 
 
 comics.post('/insertNotice',(req,res) =>{
@@ -323,6 +398,8 @@ comics.post('/insertNotice',(req,res) =>{
 })
 
 
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 comics.post('/getcomic', (req,res) =>{
     console.log(req.body.comicName)
     Comic.findOne({comicName: req.body.comicName}).populate('comment')
@@ -358,7 +435,11 @@ comics.post('/readcomic', (req,res) =>{
             {
                 if(req.body.chapter == i.chapterNum)
                 {
+<<<<<<< HEAD
                     res.json(i)
+=======
+                    res.json(i.link)
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                     break
                 }
             }
@@ -368,6 +449,7 @@ comics.post('/readcomic', (req,res) =>{
 
 
 
+<<<<<<< HEAD
 comics.post('/countchapter',(req,res) =>{
     console.log("sadfsadf");
     console.log(req.body.comicName);
@@ -380,4 +462,6 @@ comics.post('/countchapter',(req,res) =>{
 
 
 
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 module.exports = comics

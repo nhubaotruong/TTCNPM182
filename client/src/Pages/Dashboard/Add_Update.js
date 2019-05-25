@@ -26,6 +26,10 @@ const add_update = () => {
 document.addEventListener('DOMContentLoaded', function() {
     var elem = document.querySelector('#hihi'); 
     var instance = M.Tabs.init(elem, {});
+<<<<<<< HEAD
+=======
+    console.log(instance);
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
   });
 
 export default add_update;

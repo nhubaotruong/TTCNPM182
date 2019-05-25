@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "jwt-decode": "^2.2.0",
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     "material-icons-react": "^1.0.4",
     "materialize-css": "^1.0.0",
     "moment": "^2.18.1",
@@ -12,8 +15,12 @@
     "react-confirm-alert": "^2.4.1",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
+<<<<<<< HEAD
     "react-scripts": "3.0.0",
     "react-time": "^4.3.0"
+=======
+    "react-scripts": "3.0.0"
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
   },
   "scripts": {
     "start": "react-scripts start",

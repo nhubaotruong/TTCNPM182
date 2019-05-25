@@ -154,10 +154,13 @@ var Comics = require('./routes/comics')
 app.use('/comics', Comics)
 
 
+<<<<<<< HEAD
 var Users = require('./routes/users')
 
 app.use('/users',Users)
 
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 
 app.listen(port,()=>{
     console.log("Server is listening on " + port);

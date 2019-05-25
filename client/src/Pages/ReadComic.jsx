@@ -5,7 +5,11 @@ import ComicBox from './ReadComic/ComicBox';
 import ComicNav from './ReadComic/ComicNav';
 import SumComment from '../Pages/Comment/SumComment';
 import axios from 'axios';
+<<<<<<< HEAD
 import Time from 'react-time';
+=======
+
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
 
 
 
@@ -16,10 +20,14 @@ export default class readcomic extends Component
         this.state = {
             comicName : "",
             chapterNum : 1,
+<<<<<<< HEAD
             chapterName: "",
             datacomic : [],
             username : "",
             countchapter: 0
+=======
+            datacomic : []
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         };
         this.ClickPreviouschapter = this.ClickPreviouschapter.bind(this)
         this.ClickNextchapter = this.ClickNextchapter.bind(this)
@@ -33,16 +41,23 @@ export default class readcomic extends Component
 
         var chapterNum = url.slice(index1+1,index_temp);
         var comicName = url.slice(index2+1,url.length);
+<<<<<<< HEAD
 
         var username = JSON.parse(localStorage.getItem("User")).username
         this.setState({
             comicName : comicName,
             chapterNum : chapterNum,
             username : username
+=======
+        this.setState({
+            comicName : comicName,
+            chapterNum : chapterNum
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
         })
         axios
             .post('/comics/readcomic',{comicName : comicName, chapter : chapterNum})
             .then(res => {
+<<<<<<< HEAD
                 this.setState({datacomic : res.data.link,chapterName : res.data.chapter});
             })
             .catch(err => {
@@ -70,6 +85,15 @@ export default class readcomic extends Component
             .catch(err =>{
                 alert("Error!!!")
             })
+=======
+                this.setState({datacomic : res.data});
+            })
+            .catch(err => {
+                console.log('err is ',err)
+                // console.log("cc")
+            })
+        
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     }
 
 
@@ -78,7 +102,11 @@ export default class readcomic extends Component
         axios
             .post('/comics/readcomic',{comicName : this.state.comicName, chapter : this.state.chapterNum})
             .then(res => {
+<<<<<<< HEAD
                 this.setState({datacomic : res.data.link , chapterName : res.data.chapter});
+=======
+                this.setState({datacomic : res.data});
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
             })
             .catch(err => {
                 console.log('err is ',err)
@@ -89,6 +117,7 @@ export default class readcomic extends Component
 
     ClickPreviouschapter ()
     {
+<<<<<<< HEAD
         var chapterNum = parseInt(this.state.chapterNum) - 1;
         this.setState({chapterNum : chapterNum});
         axios.post('/comics/insertHistory',{
@@ -101,11 +130,15 @@ export default class readcomic extends Component
 
             })
             .catch (err => console.log(err))
+=======
+        this.setState({chapterNum : parseInt(this.state.chapterNum) - 1});
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     }
 
 
     ClickNextchapter ()
     {
+<<<<<<< HEAD
         var chapterNum = parseInt(this.state.chapterNum) + 1;
         this.setState({chapterNum : chapterNum});
         axios.post('/comics/insertHistory',{
@@ -118,6 +151,9 @@ export default class readcomic extends Component
 
             })
             .catch (err => console.log(err))
+=======
+        this.setState({chapterNum : parseInt(this.state.chapterNum) + 1});
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
     }
 
 
@@ -129,12 +165,18 @@ export default class readcomic extends Component
                 <br />
                 <ComicNav 
                     comicName={this.state.comicName} 
+<<<<<<< HEAD
                     chapterNum={this.state.chapterNum} 
                     chapterName={this.state.chapterName}
                     onclickprevious = {this.ClickPreviouschapter}
                     onclicknext = {this.ClickNextchapter}
                     bottom={false} 
                     countchapter = {this.state.countchapter}/>
+=======
+                    chapter={this.state.chapterNum} 
+                    onclickprevious = {this.ClickPreviouschapter}
+                    onclicknext = {this.ClickNextchapter}/>
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                 <br/><br/>
                 
                 {
@@ -142,6 +184,7 @@ export default class readcomic extends Component
                         <ComicBox pic= {data} />
                     )
                 }
+<<<<<<< HEAD
                 <br />
                 <ComicNav 
                     comicName={this.state.comicName} 
@@ -153,6 +196,8 @@ export default class readcomic extends Component
                     countchapter = {this.state.countchapter}/>           
 
                 <br />
+=======
+>>>>>>> 52d4f5a2590c2ca04bcdd2a27dd1923742f98433
                 </div>
                 <SumComment ComicName = {this.state.comicName} key = {this.state.comicName}/>
                 <br/>
