@@ -6,6 +6,7 @@ export default class CommentForm extends Component {
     this.state = {
       loading: false,
       error: "",
+      username: "",
       comment: {
         name: "",
         message: "",
@@ -27,6 +28,9 @@ export default class CommentForm extends Component {
 
 
   componentDidMount(){
+    if(JSON.parse(localStorage.getItem("User")) != null){
+      this.setState({username: JSON.parse(localStorage.getItem("User")).username})
+    }
     this.setState({reply_:{replyto: this.props.replyTo}})
   }
   /**
@@ -38,25 +42,51 @@ export default class CommentForm extends Component {
     var dates = date.toLocaleTimeString() + ' ' + date.toLocaleDateString();
     if(this.props.type_ ==="Comment"){
       console.log("comment")
-    this.setState({
-      ...this.state,
-      comment: {
-        ...this.state.comment,
-        [name]: value,
-        time: dates,
-        reply:[]
+      if(this.state.username != ""){
+        this.setState({
+          ...this.state,
+          comment: {
+            ...this.state.comment,
+            [name]: value,
+            time: dates,
+            reply:[],
+            name: this.state.username
+          }
+        });}
+      else{
+        this.setState({
+          ...this.state,
+          comment: {
+            ...this.state.comment,
+            [name]: value,
+            time: dates,
+            reply:[]
+          }
+        });
       }
-    });}
+    }
     if(this.props.type_ === "Reply"){
       console.log("reply")
-      this.setState({
-        ...this.state,
-        reply_: {
-          ...this.state.reply_,
-          [name]: value,
-          time: dates,
-        }
-      });
+      if(this.state.username != ""){
+        this.setState({
+          ...this.state,
+          reply_: {
+            ...this.state.reply_,
+            [name]: value,
+            time: dates,
+            name: this.state.username
+          }
+        });
+      }else{
+        this.setState({
+          ...this.state,
+          reply_: {
+            ...this.state.reply_,
+            [name]: value,
+            time: dates,
+          }
+        });
+      }
     }
     // if(localStorage.length){
     //   this.setState({comment:{
@@ -72,7 +102,7 @@ export default class CommentForm extends Component {
   onSubmit(e) {
     // prevent default form submission
     e.preventDefault();
-    localStorage.clear();
+    // localStorage.clear();
     if (!this.isFormValid()) {
       this.setState({ error: "Cần điền hết tất cả các mục"});
       return;
@@ -165,6 +195,7 @@ export default class CommentForm extends Component {
       return (
         <React.Fragment>
           <form method="post" onSubmit={this.onSubmit} style = {{backgroundColor: "#e1f5fe",border: "2px solid #d4e157",width: "auto", height: "100%",borderRadius: "5px"}}>
+            {this.state.username == "" ?
             <div className="input-field">
             <i class="material-icons prefix">account_circle</i>
               <input
@@ -176,6 +207,7 @@ export default class CommentForm extends Component {
                 type="text"
               />
             </div>
+            : ""}
             <div className="input-field">
             <i className="material-icons prefix">mode_edit</i>
               <textarea className="materialize-textarea"
