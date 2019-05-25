@@ -17,7 +17,7 @@ comments.post('/1', (req,res) => {
 
     Comment.create(commentData)
     .then(comment => {
-        res.json({status: 'add comment complete!'})
+        res.json(comment)
     })
     .catch(err => {
         res.send('error: ' + err)

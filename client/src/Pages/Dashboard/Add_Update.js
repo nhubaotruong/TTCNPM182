@@ -26,7 +26,6 @@ const add_update = () => {
 document.addEventListener('DOMContentLoaded', function() {
     var elem = document.querySelector('#hihi'); 
     var instance = M.Tabs.init(elem, {});
-    console.log(instance);
   });
 
 export default add_update;

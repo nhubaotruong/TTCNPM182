@@ -1,7 +1,5 @@
 import React,{Component} from 'react';
-import 'materialize-css/dist/css/materialize.min.css'
 import M from 'materialize-css/dist/js/materialize.min.js'
-import MaterialIcon, {colorPalette} from 'material-icons-react';
 import axios from 'axios';
 
 
@@ -42,31 +40,39 @@ class Info extends Component{
     render(){
         return (
             <div>
-                <div className="col m5 s12">
-                    <div className="card hoverable">
+                <div className="col m12 s12">
+                    <div className="card hoverable horizontal">
                     <div className="card-image">
-                        <img src={this.props.comicPic}/>
-                        <a className="btn-floating halfway-fab waves-effect waves-light red" href="#">
-                        <i className="material-icons ">close</i>
-                        </a>
+                        <img src={this.props.comicPic} alt="info"/>
                     </div>
                     <div className="card-content">
                         <span className="card-title black-text text-darken-2 b"></span>
-                        <p>Số lượng truyện: {this.state.listComics.length}</p>
+                        <p style={{height:'66px'}}>Số lượng truyện: {this.state.listComics.length}</p>
                     </div>
                     </div>
                 </div>
-                <div className="col m5 s12">
-                    <div className="card hoverable">
+                <div className="col m12 s12">
+                    <div className="card hoverable horizontal">
                     <div className="card-image">
-                        <img src={this.maxViewComic().maxAvt}/>
-                        <a className="btn-floating halfway-fab waves-effect waves-light red" href="#">
-                        <i className="material-icons ">close</i>
+                        <img src={this.props.comicPic} alt="info"/>
+                    </div>
+                    <div className="card-content">
+                        <span className="card-title black-text text-darken-2 b"></span>
+                        <p style={{height:'66px'}}>Số lượng người dùng: 12</p>
+                    </div>
+                    </div>
+                </div>
+                <div className="col m12 s12">
+                    <div className="card hoverable horizontal">
+                    <div className="card-image">
+                        <img src={this.maxViewComic().maxAvt} alt="info" width="200px" height="350px"/>
+                        <a className="btn-floating halfway-fab waves-effect waves-light red" href={'/detail?c='+this.maxViewComic().maxComic}>
+                        <i className="material-icons ">info_outline</i>
                         </a>
                     </div>
                     <div className="card-content">
                         <span className="card-title black-text text-darken-2 b"></span>
-                        <p>Truyện có nhiều view nhất: {this.maxViewComic().maxComic}. View: {this.maxViewComic().maxView}</p>
+                        <p>Truyện có nhiều view nhất: {this.maxViewComic().maxComic}. <br/>View: {this.maxViewComic().maxView}</p>
                     </div>
                     </div>
                 </div>

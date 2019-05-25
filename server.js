@@ -97,7 +97,7 @@ app.post("/adComic", urlencodedParser, function (req, res) {
     .then(()=>{
         res.redirect("/");
     })
-    .catch((e)=>console.log(e.message));
+    .catch((e)=>{console.log(e.message); res.send("Error")});
 });
 
 app.post("/deleteComic",(req,res)=>{
@@ -147,6 +147,19 @@ app.use('/binhluan',Comments);
 var Ratings = require('./routes/Rating');
 app.use('/xep_hang',Ratings);
 
+
+// Readcomic: Khải
+var Comics = require('./routes/comics')
+
+app.use('/comics', Comics)
+
+
+var Users = require('./routes/users')
+
+app.use('/users',Users)
+
+
 app.listen(port,()=>{
     console.log("Server is listening on " + port);
 })
+

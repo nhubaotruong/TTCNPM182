@@ -115,13 +115,13 @@ export default class Comment extends Component {
               style={{ marginRight: "10px" }} />
             <span className="title"><h5 className="mt-0 mb-1 text-muted"> <p style={{ fontWeight: "bold" }}>{reply.name}</p></h5></span>
             <div className="c" style={{ textAlign: "justify", textJustify: "inter-word", marginLeft: "1%" }}><span className="blue-text">@{reply.replyto} </span> {reply.message}</div>
-            <button className="waves-effect blue btn" style={{ marginTop: "10px", marginLeft: "1%" }} onClick={this.Reply_2.bind(this, index)}>Reply</button>
+            <button className="waves-effect blue btn" style={{ marginTop: "10px", marginLeft: "1%" }} onClick={this.Reply_2.bind(this, index)}>Trả lời</button>
             <small className="secondary-content text-muted">{reply.time} + {index+1} </small>
             {this.state.rep_2 === index ? <button className="waves-effect blue btn" style={{ marginTop: "10px", marginLeft: "1%" }} onClick={this.Cancel.bind(this)}>Huỷ</button> : ""}
           </li>
           <div>
             {(this.state.rep_2 === index) ? (<div>
-              <CommentForm addComment={this.addReply} type_="Reply" replyTo={reply.name} />
+              <CommentForm addComment={this.addReply} type_="Trả lời" replyTo={reply.name} />
             </div>
             ) :
               ''}
@@ -145,14 +145,14 @@ export default class Comment extends Component {
               style={{ marginRight: "10px" }} />
             <span className="title"><h5 className="mt-0 mb-1 text-muted"> <p style={{ fontWeight: "bold" }}>{this.props.name}</p></h5></span>
             <div className="c" style={{ textAlign: "justify", textJustify: "inter-word", marginLeft: "1%" }}>{this.props.message}</div>
-            <button className="waves-effect blue btn" style={{ marginTop: "10px", marginLeft: "1%" }} onClick={this.Reply_1.bind(this)}>Reply</button>
+            <button className="waves-effect blue btn" style={{ marginTop: "10px", marginLeft: "1%" }} onClick={this.Reply_1.bind(this)}>Trả lời</button>
             <small className="secondary-content text-muted">{this.props.time} + {this.props.index_} </small>
             {this.state.rep_1 ? <button className="waves-effect blue btn" style={{ marginTop: "10px", marginLeft: "1%" }} onClick={this.Cancel.bind(this)}>Huỷ</button> : ""}
           </li>
           {/* Form reply */}
           <div>
             {this.state.rep_1 ? (<div style={{ marginLeft: "4%", paddingRight: "4%" }}>
-              <CommentForm addComment={this.addReply} type_="Reply" replyTo={this.props.name} />
+              <CommentForm addComment={this.addReply} type_="Trả lời" replyTo={this.props.name} />
             </div>
             ) :
               ''}

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import 'materialize-css/dist/css/materialize.min.css'
-import M from 'materialize-css/dist/js/materialize.min.js'
-import MaterialIcon, {colorPalette} from 'material-icons-react';
 import axios from 'axios';
 
 
 export default class FavouriteList extends Component {
+  constructor(props) {
+        super(props);
+        this.handleClick_deleteFavourite = this.handleClick_deleteFavourite.bind(this);
+      }
 
-
-  handleClick_deleteFavourite (e,f) {
+  handleClick_deleteFavourite (e) {
     e.preventDefault()
-    console.log(typeof(f));
     axios
-      .post('/comics/deleteFavouriteList', {id : f})
+      .post('/comics/deleteFavouriteList', {id : this.props.comicID,username : this.props.username})
       .then(r => {console.log(r.data)})
       .catch(err => {
         console.error(err)
@@ -21,23 +20,45 @@ export default class FavouriteList extends Component {
   }
 
   render() {
+    var url = "/detail" + "?" + "c=" + this.props.comicName;
 	return (
-		<div >
-    <div class="col m3 s12" >
-      <div class="card hoverable">
-        <div class="card-image">
-          <img src={this.props.comicPic}/>
-          <button class="btn-floating halfway-fab waves-effect waves-light red " onClick={e => this.handleClick_deleteFavourite(e,this.props.comicID)}>
-            <i class=" center material-icons">close</i>
-          </button>
-        </div>
-        <div class="card-content">
-          <span class="card-title black-text text-darken-2 b">{this.props.comicName}</span>
+	// 	<div >
+  //   <div className="col m3 s12" >
+  //     <div className="card hoverable">
+  //       <div className="card-image">
+  //         <img src={this.props.comicPic} alt="sth"/>
+  //         <button className="btn-floating halfway-fab waves-effect waves-light red " onClick={e => this.handleClick_deleteFavourite(e)}>
+  //           <i className="material-icons">close</i>
+  //         </button>
+  //       </div>
+  //       <div className="card-content">
+  //         <span className="card-title black-text text-darken-2 b">{this.props.comicName}</span>
           
-        </div>
+  //       </div>
+  //       <div className="card-action">
+  //         <a href={url}>Read more ...</a>
+  //       </div>
+  //     </div>
+  //   </div>
+  // </div>
+  <div>
+      <div className="col m3 s12">
+        <div className="card hoverable">
+          <div className="card-image">
+            <a href={url}><img src={this.props.comicPic} alt="tt" width="200px" height="350px"/></a>
+            <button className="btn-floating halfway-fab waves-effect waves-light red " onClick={e => this.handleClick_deleteFavourite(e)}>
+              <i className="material-icons">close</i>
+            </button>
+          </div>
+          <div className="card-content" style={{padding:'15px'}}>
+            <p>{this.props.comicName}</p>
+          </div>
+          <div className="card-action">
+            <b><a href={url} className="cyan-text text-darken-4" >Đọc thêm ...</a></b>
+          </div>
       </div>
+                </div>
     </div>
-  </div>
 	);
   }
 }

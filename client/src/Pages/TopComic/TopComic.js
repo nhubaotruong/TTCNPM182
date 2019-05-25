@@ -9,11 +9,11 @@ const topComic = (props) => {
                         <div className="card-image">
                             <a href={url}><img src={props.comicPic} alt="tt" width="200px" height="350px"/></a>
                         </div>
-                        <div className="card-content">
+                        <div className="card-content" style={{padding:'15px'}}>
                             <p>{props.comicName}</p>
                         </div>
                         <div className="card-action">
-                            <a href={url}>Read more ...</a>
+                            <b><a href={url} className="cyan-text text-darken-4" >Đọc thêm ...</a></b>
                         </div>
                     </div>
                 </div>

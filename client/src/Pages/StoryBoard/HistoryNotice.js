@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import 'materialize-css/dist/css/materialize.min.css'
-import M from 'materialize-css/dist/js/materialize.min.js'
-import MaterialIcon, {colorPalette} from 'material-icons-react';
-import axios from 'axios'
+import axios from 'axios';
 
 export default class HistoryNotice extends Component
 {
 
-	handleClick_deleteHistory (e,f) {
+  constructor(props) {
+        super(props);
+        this.handleClick_deleteHistory = this.handleClick_deleteHistory.bind(this);
+      }
+
+	handleClick_deleteHistory (e) {
     e.preventDefault()
-    console.log(f);
     if (this.props.comicHistory == "true")
     {
     axios
-      .post('/comics/deleteHistory', {id : f})
+      .post('/comics/deleteHistory', {id : this.props.comicID, username : this.props.username})
       .then(r => {console.log(r.data)})
       .catch(err => {
         console.error(err)
@@ -21,7 +22,7 @@ export default class HistoryNotice extends Component
   	}
   	else {
   		axios
-      		.post('/comics/deleteNotice', {id : f})
+      		.post('/comics/deleteNotice', {id : this.props.comicID, username : this.props.username})
       		.then(r => {console.log(r.data)})
       		.catch(err => {
         console.error(err)
@@ -40,18 +41,23 @@ export default class HistoryNotice extends Component
 		else {
 			booleanhistory = <p>Update {this.props.comicTime}</p>
 		}
+    var url = "readComic?c=" + this.props.comicChap + "?c1=" + this.props.comicName
 	return (
-
-		<li class="collection-item avatar">
-      		<img src={this.props.comicPic} alt="" class="circle img-responsive"/>
+		<div>
+		<li className="collection-item avatar col m6">
+      		<img src={this.props.comicPic} alt="" className="circle img-responsive" style={{marginTop:'20px'}}/>
       		{booleanhistory}
       		
-      		<span class="title ">{this.props.comicName}</span>
+      		<b><span className="title ">{this.props.comicName}</span></b>
       		<p>Chapter {this.props.comicChap}</p>
-      		<a href="#!" class="secondary-content btn-floating halfway-fab waves-effect waves-light red" onClick={e => this.handleClick_deleteHistory(e,this.props.comicID)}>
-      			<i class=" center material-icons">close</i>
+          <div className="card-action">
+                            <a href={url}>Read now </a>
+                        </div>
+      		<a href="#!" className="secondary-content btn-floating halfway-fab waves-effect waves-light red" onClick={e => this.handleClick_deleteHistory(e)}>
+      			<i className="material-icons">close</i>
       		</a>
     	</li>
+			</div>
 	);
 	}
 }

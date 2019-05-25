@@ -12,7 +12,15 @@ export const addComic = newComic => {
         kind: newComic.kind
     })
     .then(res=>{
-        console.log("Add Successful!!");
+        if(res.data == "Error"){
+            alert("Truyện thêm vào bị trùng tên truyện hoặc lỗi!")
+        }else{
+            console.log("Add Successful!!");
+            alert("Thêm truyện thành công!")
+        }
+    })
+    .catch(err=>{
+        console.log(err)
     })
 }
 

@@ -5,7 +5,6 @@ import Body from "./Detail/Body";
 import {sendComic} from "./Functions";
 import axios from 'axios';
 import SumComment from "./Comment/SumComment";
-import Rating from "./Rating/Rating";
 class App extends Component {
     constructor(){
 		super();
@@ -37,7 +36,8 @@ class App extends Component {
                 <Body comic={this.state.comic}/>
                 </div>
                 <br/>
-                <SumComment comment = {this.state.comic.comment}/>
+                <SumComment ComicName = {this.state.comic.comicName} key = {this.state.comic.comicName} />
+                <br/>
                 <Footer />
             </div>
       );
