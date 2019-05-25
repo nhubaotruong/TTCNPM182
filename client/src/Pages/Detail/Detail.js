@@ -19,7 +19,10 @@ export default class Detail extends Component {
     }
 
     componentWillMount() {
-        var username = JSON.parse(localStorage.getItem("User")).username
+        var username = ""
+        if(JSON.parse(localStorage.getItem("User"))!=null){
+            username = JSON.parse(localStorage.getItem("User")).username
+        }
         
         
         var url = window.location.href;
@@ -119,6 +122,7 @@ export default class Detail extends Component {
                                              publisher={this.props.comic.company}
                                              status="Chưa rõ"/>
                                 </tr>
+                                { this.state.username != "" ?
                                 <tr>
 
                                     <a className="btn btn-large grey darken-3 white-text waves-effect waves-light" 
@@ -126,6 +130,7 @@ export default class Detail extends Component {
                                         {this.state.checkadd ? "Thêm vào yêu thích" : "Bỏ yêu thích"}
                                     </a>
                                 </tr>
+                                : ""}
                                 </table>
                             </td>
                         </tr>

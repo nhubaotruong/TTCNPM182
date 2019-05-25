@@ -23,9 +23,15 @@ class Storybroad extends Component
     }
 
     componentDidMount(){
-        this.setState({
-            username : JSON.parse(localStorage.getItem("User")).username
-        })
+        if(JSON.parse(localStorage.getItem("User"))!= null){
+            this.setState({
+                username : JSON.parse(localStorage.getItem("User")).username
+            })
+        }else{
+            alert("Bạn cần đăng nhập để sử dụng chức năng này")
+            window.location = "/home"
+        }
+        
         // var username = JSON.parse(localStorage.getItem("User")).username
         // axios
         //     .post('/comics/showFavouriteList',{username : username})
