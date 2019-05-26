@@ -15,7 +15,7 @@ const dashboard = () => {
                     <li><a href="./home"><img src={"logo.png"} alt="logo" width = "60px" height = "60px"/></a></li>
                 </ul>
                 <ul id="nav-mobile" className="right">
-                    <li><a className="waves-effect waves-light btn"><i className="material-icons left">person</i>Admin</a></li>
+                    <li><a href="/storyboard" className="waves-effect waves-light btn"><i className="material-icons left">person</i>Admin</a></li>
                     <li>
                     <form action="" className="browser-default right">
                     <ul>

@@ -2,14 +2,15 @@ import axios from "axios";
 
 export const addComic = newComic => {
     return axios
-    .post("/adComic",{
+    .post("/addComic",{
         comicName : newComic.comicName,
         author : newComic.author,
         artist: newComic.artist,
         company: newComic.company,
         description: newComic.description,
         avatar: newComic.avatar,
-        kind: newComic.kind
+        kind: newComic.kind,
+        data: newComic.data
     })
     .then(res=>{
         if(res.data == "Error"){
