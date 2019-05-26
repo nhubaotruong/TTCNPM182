@@ -38,7 +38,6 @@ class Storybroad extends Component
         axios
             .post('/comics/showFavouriteList',{username : username})
             .then(res => {
-                
                 this.setState({ Favouritecomics : res.data});
                 
             })
