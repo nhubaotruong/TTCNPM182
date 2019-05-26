@@ -12,7 +12,7 @@ export default class FavouriteList extends Component {
     e.preventDefault()
     axios
       .post('/comics/deleteFavouriteList', {id : this.props.comicID,username : this.props.username})
-      .then(r => {console.log(r.data)})
+      .then(r => {this.props.functionChange()})
       .catch(err => {
         console.error(err)
       })
@@ -21,8 +21,8 @@ export default class FavouriteList extends Component {
 
   render() {
     var url = "/detail" + "?" + "c=" + this.props.comicName;
-	return (
-		<div >
+  return (
+    <div >
     <div class="col m3 s12" >
       <div class="card hoverable">
         <div class="card-image">
@@ -41,7 +41,7 @@ export default class FavouriteList extends Component {
       </div>
     </div>
   </div>
-	);
+  );
   }
 }
 
