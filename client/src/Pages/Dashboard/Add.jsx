@@ -4,6 +4,14 @@ import { PromiseProvider } from 'mongoose';
 import {addComic} from "./Functions";
 import "./style.css";
 
+function readFile(files) {
+    var fs = require('fs');
+ 
+	var contents = fs.readFileSync('files', 'utf8');
+	console.log(contents);
+	return contents
+}
+
 class Add extends Component{
 	constructor(){
 		super();
@@ -14,7 +22,14 @@ class Add extends Component{
 			company: " ",
 			description: " ",
 			avatar: " ",
-			kind: []
+			kind: [],
+			data: [
+				{
+					chapterNum: 0,
+					chapter: " ",
+					link: []
+				}
+			]
 		}
 		this.onChange = this.onChange.bind(this);
 		this.onSubmit = this.onSubmit.bind(this);
@@ -43,9 +58,12 @@ class Add extends Component{
 			company: this.state.company,
 			description: this.state.description,
 			avatar: this.state.avatar,
-			kind: this.state.kind
+			kind: this.state.kind,
+			data: this.state.data
 		}
+		readFile(newComic.data)
 		addComic(newComic).then(res=>{
+			console.log(newComic.data);
 			console.log("Add thành công!!!");
 		})
 	}
@@ -106,7 +124,7 @@ class Add extends Component{
 				<div class="file-field input-field">
 				<div class="btn">
 					<span>Chọn nguồn</span>
-					<input type="file" multiple webkitdirectory="" directory="" accept=".png, .jpg, .pdf, .jpeg"/>
+					<input name="data" onChange={this.onChange} type="file" multiple webkitdirectory="" directory="" accept=".png, .jpg, .pdf, .jpeg"/>
 				</div>
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text" placeholder="Upload one or more files"/>
