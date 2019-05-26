@@ -10,7 +10,7 @@ class resultcell extends Component {
             <div>
                 <table style={{border:"none"}}>
                     <tr>
-                    <td><img src={this.props.comicPic} alt="comicPic" style={{width:"180px"}}/></td>
+                    <td><a href={url}><img src={this.props.comicPic} alt="comicPic" style={{width:"180px"}}/></a></td>
                     <td>
                         <div className="padd">
                         <a className="text-link" href={url}>{this.props.name}</a>

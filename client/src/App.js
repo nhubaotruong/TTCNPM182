@@ -17,7 +17,8 @@ class App extends Component {
           <Switch>
             <Route exact path="/home" component={Homepage}/>
             <Route exact path="/storyboard" component={Storyboard} />
-            <Route exact path="/dashboard" component={Dashboard}/>
+            {(JSON.parse(localStorage.getItem("User")) != null) ? ((JSON.parse(localStorage.getItem("User")).username === "admin") ?
+            <Route exact path="/dashboard" component={Dashboard}/> : "") : ""}
             <Route exact path="/detail" component={Detail} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/signin" component={Signin} />
