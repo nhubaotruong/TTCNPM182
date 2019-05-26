@@ -4,7 +4,6 @@ import TopComic from './TopComic/TopComic.js';
 import RecentUpload from './RecentUpload/RecentUpload.js';
 import NavBar from './Basic/NavBar.js';
 import Footer from './Basic/Footer.js';
-import {getComic} from "./Functions";
 import axios from 'axios';
 
 
@@ -80,20 +79,12 @@ class homepage extends Component{
       <div>
       <div className='container'>
         <NavBar />
-        <span className="tit">Top Comics</span>
+        <h2>Truyện xem nhiều nhất</h2>
         <div className="row">
 					{this.showTopComic()}
-					{/* <TopComic comicPic="logo.png" comicName="Name 1" />
-					<TopComic comicPic="logo.png" comicName="Name 2" />
-					<TopComic comicPic="logo.png" comicName="Name 3" />
-					<TopComic comicPic="logo.png" comicName="Name 4" /> */}
         </div>  
-        <span className="tit">Recent Uploads</span>
+        <h2>Truyện mới nhất</h2>
 				{this.showListComic()}
-        {/* <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
-        <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
-        <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
-        <RecentUpload comicPic="logo.png" comicDes="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />        */}
       </div>
       <div>
       <Footer />

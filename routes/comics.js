@@ -159,7 +159,7 @@ comics.post('/deleteHistory',(req,res) =>{
         }
         
         user.findOneAndUpdate({username : req.body.username},{$set:{"History" : e.History}},{new: true}).then(doc => {
-            console.log("delete done")
+            res.json(true)
         })
         .catch(err => {
             console.error(err)
@@ -248,7 +248,7 @@ comics.post('/deleteNotice',(req,res) =>{
         }
         console.log(req.body.id)
         user.findOneAndUpdate({username : req.body.username},{$set:{"Notice" : e.Notice}},{new: true}).then(doc => {
-    console.log("delete done")
+    res.json(true)
   })
   .catch(err => {
     console.error(err)

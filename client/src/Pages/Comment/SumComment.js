@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-// import "bootstrap/dist/css/bootstrap.css";
 import "./style.css";
 import axios from 'axios';
-
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 
@@ -115,10 +113,10 @@ class SumComment extends Component {
       <div className="App container bg-light shadow m 2">
         <div className="column" style={{border:"0.5px solid black",padding: "1%", paddingBottom: "2%"}}>
           <div className="col-12  pt-3">
-            <h3 className = "blue-text" style={{fontWeight: "bold"}}>NHẬN XÉT VÀ BÌNH LUẬN:</h3>
-            <CommentForm addComment={this.addComment} type_ = "Comment" comicName = {this.props.ComicName}/>
+            <h5 className = "blue-text" style={{fontWeight: "bold"}}>NHẬN XÉT VÀ BÌNH LUẬN:</h5>
+            <CommentForm addComment={this.addComment} type_ = "Bình luận" comicName = {this.props.ComicName}/>
           </div>
-          <div className="col-12  pt-3 bg-white">
+          <div className="col-12 pt-3 bg-white">
             <CommentList
               loading={this.state.loading}
               comments={this.state.comments}

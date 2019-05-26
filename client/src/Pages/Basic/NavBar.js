@@ -43,12 +43,12 @@ class navbar extends Component{
       <ul className="navbar-nav">
         <li className="nav-item" >
           <a href ="/signin" className ="nav-link">
-            Signin
+            Đăng nhập
           </a>
         </li>
         <li className="nav-item" >
           <a href ="/signup" className ="nav-link">
-            Signup
+            Đăng kí
           </a>
         </li>
       </ul>
@@ -66,7 +66,7 @@ class navbar extends Component{
         </li>
         <li className="nav-item" >
           <a href="" onClick = {this.LogOut} className="nav-link">
-            Logout
+            Đăng xuất
           </a>
         </li>
       </ul>
@@ -89,7 +89,7 @@ class navbar extends Component{
                 <li>
                   <table className="striped">
                     <tr>
-                      <td style={{padding:'0'}}><input type="search" results="5" autoSave="some_unique_value" name="comicName" autoComplete="off" onChange={this.onChange} aria-label="Search box" placeholder=" Search..." className="white-text"/></td>
+                      <td style={{padding:'0'}}><input type="search" results="5" autoSave="some_unique_value" name="comicName" autoComplete="off" onChange={this.onChange} aria-label="Search box" placeholder=" Tìm kiếm ..." className="white-text"/></td>
                       <td style={{padding:'8px 0 0 0'}}>
                         <div className="input-field" >
                           <select name="searchby" id="searchby" multiple onChange={this.disablename}>

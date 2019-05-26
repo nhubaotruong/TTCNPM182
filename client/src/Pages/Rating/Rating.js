@@ -311,7 +311,7 @@ class ReactStars extends Component {
         } = this.props
 
         return (
-            <div style = {{marginLeft: "20px"}}>
+            <div style = {{marginLeft: "10px"}}>
                 <div className={className} style={parentStyles} className="valign-wrapper">
                     {this.state.config.half ?
                         this.renderHalfStarStyleElement() : ''}

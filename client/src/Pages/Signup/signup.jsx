@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './stylesign.css';
 import axios from 'axios';
+import Header from '../Basic/NavBar';
 
 class signup extends Component 
 {
@@ -26,7 +27,7 @@ class signup extends Component
         e.preventDefault()
         if (this.state.username && this.state.password && this.state.verfiactionpassword)
         {
-            if (this.state.password != this.state.verfiactionpassword){
+            if (this.state.password !== this.state.verfiactionpassword){
                 alert( "Xác nhận không khớp mật khẩu")
             
                 this.setState({verfiactionpassword: "" })
@@ -75,27 +76,23 @@ class signup extends Component
         x.type = "password";
         }
     }
-    disable_login(){
-        var y = document.getElementById("login");
-        y.style.display="none";
-    }
 
     render()
     {
     return (
-        <div className="container" onLoad={this.disable_login}>
-            
+        <div className="container">
+            <Header />
         <div class="all">
             <div class="nav">
                 <nav>
                     <div class="nav-wrapper grey darken-3">
-                    <a class="brand-logo center">SIGN UP</a>
+                    <a class="brand-logo center">Đăng kí</a>
                     </div>
                 </nav>
             </div>
             
             <div class="cont">
-                <p class="note"><span class="req">*</span> fields are required</p>
+                <p class="note"><span class="req">*</span> trường bắt buộc</p>
                 <div class="row" >
                 <form class="col s12 m12">
 
@@ -118,11 +115,11 @@ class signup extends Component
                             onChange = {this.onChange}
                             name = "password"
                             value = {this.state.password}/>
-                        <label htmlFor="password">Password<span class="req">*</span></label>
+                        <label htmlFor="password">Mật khẩu<span class="req">*</span></label>
                         <p>
                             <label>
                                 <input type="checkbox" onClick={this.showpass} class="filled-in"/>
-                                <span>Show Password</span>
+                                <span>Hiện mật khẩu</span>
                             </label>
                         </p>
                         </div>
@@ -135,7 +132,7 @@ class signup extends Component
                             onChange = {this.onChange}
                             name = "verfiactionpassword"
                             value = {this.state.verfiactionpassword}/>
-                        <label htmlFor="verfiactionpassword">Verfiaction Password<span class="req">*</span></label>
+                        <label htmlFor="verfiactionpassword">Xác nhận mật khẩu<span class="req">*</span></label>
 
                         </div>
                     </div>
@@ -144,13 +141,13 @@ class signup extends Component
 
                 
                 <div class="row center-align">
-                    <button class="btn waves-effect waves-light grey darken-3" onClick = {this.onSubmit} name="action">Sign up
+                    <button class="btn waves-effect waves-light grey darken-3" onClick = {this.onSubmit} name="action">Đăng kí
                         <i class="material-icons right">send</i>
                     </button>
                 </div>
                 <div class="row center-align"> 
-                    <p>Have an account already? </p>
-                    <a href="/signin"> Sign in here! </a>
+                    <p>Đã có tài khoản? </p>
+                    <a href="/signin"> Đăng nhập ở đây! </a>
                 </div>  
                 </form>
                 </div>

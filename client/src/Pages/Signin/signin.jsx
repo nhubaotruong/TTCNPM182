@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './stylesign.css';
 import axios from 'axios';
+import Header from '../Basic/NavBar';
 class signin extends Component 
 {
 
@@ -28,7 +29,7 @@ class signin extends Component
                 if (res.data == null)
                 {
                     this.setState({password : ""})
-                    alert("Username hoặc password nhập sai!!!")
+                    alert("Username hoặc mật khẩu nhập sai!!!")
                 }
                 else if (res.data)
                 {
@@ -38,7 +39,7 @@ class signin extends Component
                 else 
                 {
                     this.setState({password : ""})
-                    alert("Username hoặc password nhập sai!!!")
+                    alert("Username hoặc mật khẩu nhập sai!!!")
                 }
             })
             .catch(err =>{
@@ -58,24 +59,18 @@ class signin extends Component
     }
 
 
-    disable_login(){
-        var y = document.getElementById("login");
-        y.style.display="none";
-    }
-
-
 
     render()
     {
     return (
         
-        <div className="container" onLoad={this.disable_login}>
-            
+        <div className="container">
+            <Header />
             <div className="all">
             <div className="nav spacein">
                 <nav >
                     <div className="nav-wrapper grey darken-3">
-                    <a className="brand-logo center">SIGN IN</a>
+                    <a className="brand-logo center">Đăng nhập</a>
                     </div>
                 </nav>
             </div>
@@ -102,28 +97,28 @@ class signin extends Component
                             onChange= {this.onChange}
                             name ="password"
                             value = {this.state.password}/>
-                        <label htmlFor="password">Password<span className="req">*</span></label>
+                        <label htmlFor="password">Mật khẩu<span className="req">*</span></label>
                         <p>
                             <label>
                                 <input type="checkbox" onClick={this.showpass} className="filled-in"/>
-                                <span>Show Password</span>
+                                <span>Hiện mật khẩu</span>
                             </label>
                         </p>
                         </div>
                     </div>
                 <div className="row"> 
-                    <a href="forgetpass.html"> Forgot your password? </a>
+                    <a href="forgetpass.html"> Quên mật khẩu? </a>
                 </div> 
                     
                 
                 <div className="row center-align">
-                    <button className="btn waves-effect waves-light grey darken-3" onClick = {this.onSubmit} name="action">Sign in
+                    <button className="btn waves-effect waves-light grey darken-3" onClick = {this.onSubmit} name="action">Đăng nhập
                             <i className="material-icons right">send</i>
                     </button>
                 </div>
                 <div className="row center-align"> 
-                    <p>Don't have an account yet? </p>
-                    <a href="./signup"> Sign up here! </a>
+                    <p>Chưa có tài khoản? </p>
+                    <a href="./signup"> Đăng kí ở đây! </a>
                 </div>  
                 </form>
                 </div>

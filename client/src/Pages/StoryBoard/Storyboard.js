@@ -19,33 +19,40 @@ class Storybroad extends Component
             Historycomics : [],
             Noticecomics : []
         };
-
+        this.onChangeFavouriteList = this.onChangeFavouriteList.bind(this);
+        this.onChangeHistory = this.onChangeHistory.bind(this);
     }
 
-    componentDidMount(){
-        this.setState({
-            username : JSON.parse(localStorage.getItem("User")).username
-        })
-        // var username = JSON.parse(localStorage.getItem("User")).username
-        // axios
-        //     .post('/comics/showFavouriteList',{username : username})
-        //     .then(res => {
+    componentWillMount(){
+        if (localStorage.getItem("User"))
+        {
+            this.setState({
+                username : JSON.parse(localStorage.getItem("User")).username
+            })
+        }
+        else {
+            alert("Bạn cần đăng nhập để sử dụng chức năng này")
+            window.location = "/home"
+        }
+        var username = JSON.parse(localStorage.getItem("User")).username
+        axios
+            .post('/comics/showFavouriteList',{username : username})
+            .then(res => {
+                this.setState({ Favouritecomics : res.data});
                 
-        //         this.setState({ Favouritecomics : res.data});
-                
-        //     })
-        //     .catch(err => {
-        //         console.log('err is ',err)
-        //     })
+            })
+            .catch(err => {
+                console.log('err is ',err)
+            })
 
-        // axios
-        //     .post('/comics/showHistory', {username : username})
-        //     .then(res => {
-        //         this.setState({ Historycomics : res.data});
-        //     })
-        //     .catch(err => {
-        //         console.log('err is ' , err)
-        //     })
+        axios
+            .post('/comics/showHistory', {username : username})
+            .then(res => {
+                this.setState({ Historycomics : res.data});
+            })
+            .catch(err => {
+                console.log('err is ' , err)
+            })
         // axios
         //     .post('/comics/showNotice', {username : username})
         //     .then(res => {
@@ -56,7 +63,7 @@ class Storybroad extends Component
         //     })
     }
 
-    componentDidUpdate() {
+    onChangeFavouriteList() {
         // var username = JSON.parse(localStorage.getItem("User")).username
         axios
             .post('/comics/showFavouriteList',{username : this.state.username})
@@ -68,7 +75,9 @@ class Storybroad extends Component
             .catch(err => {
                 console.log('err is ',err)
             })
-
+    }
+    onChangeHistory(){
+        console.log("change history");
         axios
             .post('/comics/showHistory', {username :  this.state.username})
             .then(res => {
@@ -77,6 +86,8 @@ class Storybroad extends Component
             .catch(err => {
                 console.log('err is ' , err)
             })
+
+
         // axios
         //     .post('/comics/showNotice', {username :  this.state.username})
         //     .then(res => {
@@ -89,64 +100,79 @@ class Storybroad extends Component
 
     
     showFavouritecomics = () => {
-        if(this.state.Favouritecomics.length == 0)
+        if(this.state.Favouritecomics.length === 0)
         {
-            return <div>Danh sách ưu thích trống</div>
+            return <div>Danh sách yêu thích trống</div>
         }
         else{
 
             return this.state.Favouritecomics.map((comic) => {
-                return <FavouriteList comicPic = {comic.idcomic.avatar} comicName = {comic.idcomic.comicName} comicID ={comic.idcomic._id} username = {this.state.username}/>
+                return <FavouriteList 
+                                        comicPic = {comic.idcomic.avatar}  
+                                        comicName = {comic.idcomic.comicName} 
+                                        comicID ={comic.idcomic._id} 
+                                        username = {this.state.username} 
+                                        functionChange = {this.onChangeFavouriteList}
+                        />
             }
     )}}
     showHistorycomics = () => {
 
-        if(this.state.Historycomics.length == 0){
+        if(this.state.Historycomics.length === 0){
             return <div>Không có lịch sử</div>
         }
         else {
             return this.state.Historycomics.map((comic) =>{
-                return <HistoryNotice comicPic={comic.idcomic.avatar} comicName = {comic.idcomic.comicName} comicChap= {comic.chap} comicTime = {Moment(comic.time).format("MMMM Do, YYYY H:mma")} comicID = {comic.idcomic} comicHistory = "true" username = {this.state.username}/>
+                return <HistoryNotice 
+                                        comicPic={comic.idcomic.avatar} 
+                                        comicName = {comic.idcomic.comicName}  
+                                        comicChap= {comic.chap} 
+                                        comicTime = {Moment(comic.time).format("MMMM Do, YYYY H:mma")} 
+                                        comicID = {comic.idcomic} 
+                                        comicHistory = "true" 
+                                        username = {this.state.username} 
+                                        functionChange = {this.onChangeHistory}
+                        />
             })
         }
     }
-	render()
-	{
+    render()
+    {
 
-		return (
-		<div>
-			<h2>Storyboard</h2>
-			<div class="row">
-    			<div class="col s12 16">
-      				<ul class="tabs">
-        				<li class="tab col s6" >
-        	  				<a href="#Favourite" class="waves-effect waves-red black-text" >Favourite List</a>
-        				</li>
-        				<li class="tab col s6">
-        					<a href="#History" class="waves-effect waves-red black-text" >History</a>
-        				</li>
-        				
-      				</ul>
-      				<div id="Favourite" class = "row">
+        return (
+        <div>
+            <h2>Storyboard</h2>
+            <div class="row">
+                <div class="col s12 16">
+                    <ul class="tabs">
+                        <li class="tab col s6" >
+                            <a href="#Favourite" class="waves-effect waves-red black-text" >Danh sách yêu thích</a>
+                        </li>
+                        <li class="tab col s6">
+                            <a href="#History" class="waves-effect waves-red black-text" >Lịch sử đọc truyện</a>
+                        </li>
+                        
+                    </ul>
+                    <div id="Favourite" class = "row">
                         {   
                             this.showFavouritecomics()
                         }
 
-					</div>
-    				<div id="History">
-    					<ul class="collection">
-    						{
+                    </div>
+                    <div id="History">
+                        <ul class="collection">
+                            {
                                 this.showHistorycomics()
                             }
-    					</ul>
-    				</div>
-    				
-    			</div>
+                        </ul>
+                    </div>
+                    
+                </div>
     
-  			</div>
-  		</div>
-		);
-	}
+            </div>
+        </div>
+        );
+    }
 }
 
 

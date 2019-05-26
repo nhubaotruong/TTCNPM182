@@ -3,8 +3,8 @@ import Rating from "../Rating/Rating";
 const comicdetail = (props) => {
     return (
         <div className="row">
-            <Rating idComic={props.idComic} key = {props.idComic}></Rating>
-            <br></br>
+            <Rating idComic={props.idComic} key = {props.idComic} />
+            <br />
             <table className="col m12">
                     <tr>
                         <td className="col m2">Tác giả:</td>
