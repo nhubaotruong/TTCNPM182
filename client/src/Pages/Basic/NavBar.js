@@ -2,6 +2,17 @@ import React,{Component} from 'react';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import './s.css';
 
+function goDashboard(name){
+    var link = ""
+    if (name == "admin"){
+        link = "/dashboard";
+    }
+    else {
+        link = "/storyboard";
+    }
+    return link;
+}
+
 class navbar extends Component{
 	constructor(){
 		super();
@@ -11,7 +22,7 @@ class navbar extends Component{
 		}
     this.onChange = this.onChange.bind(this);
     this.LogOut = this.LogOut.bind(this);
-  }
+    }
 
   // componentDidMount(){
   //   const user = localStorage.User
@@ -25,17 +36,19 @@ class navbar extends Component{
 		this.setState({
 			[e.target.name] : e.target.value
 		})
-  }
+    }
   
-  LogOut(e){
-    e.preventDefault()
-    localStorage.removeItem('User')
-    window.location = "/home";
-  }
+    LogOut(e){
+        e.preventDefault()
+        localStorage.removeItem('User')
+        window.location = "/home";
+    }
 
-  disablename = () => {
-    document.getElementById("name").selected = false;
-  }
+    disablename = () => {
+        document.getElementById("name").selected = false;
+    }
+  
+    
 
 	render(){
     var url = "/search" + "?" + "c=" + this.state.comicName;
@@ -53,12 +66,13 @@ class navbar extends Component{
         </li>
       </ul>
     )
-
-
+    var getlink = goDashboard(localStorage.User ? JSON.parse(localStorage.getItem("User")).username : "");
+  
     const userlink = (
+      
       <ul className="navbar-nav">
         <li className="nav-item" >
-          <a href ="/storyboard" className ="nav-link">
+          <a href = {getlink} className ="nav-link">
             {
               localStorage.User ? JSON.parse(localStorage.getItem("User")).username : ""
             }
