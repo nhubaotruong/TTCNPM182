@@ -1,11 +1,13 @@
 import React from 'react';
 import './ComicBox.scss';
+import LazyLoad from 'react-lazyload';
 
 const readcomic = (props) => {
     return (
         <div>
-            <img src={props.pic} alt="comic" className="centerer"/>
-            
+            <LazyLoad height={1050}>
+                <img src={props.pic} alt="comic" className="centerer"/>
+            </LazyLoad>
         </div>
     );
 }

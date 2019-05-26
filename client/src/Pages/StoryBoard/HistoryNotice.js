@@ -47,20 +47,21 @@ export default class HistoryNotice extends Component
     }
     var url = "readComic?c=" + this.props.comicChap + "?c1=" + this.props.comicName
   return (
-
-    <li class="collection-item avatar">
-          <img src={this.props.comicPic} alt="" class="circle img-responsive"/>
-          {booleanhistory}
-          
-          <span class="title ">{this.props.comicName}</span>
-          <p>Chapter {this.props.comicChap}</p>
+<div>
+		<li className="collection-item avatar col m6">
+      		<img src={this.props.comicPic} alt="" className="circle img-responsive" style={{marginTop:'20px'}}/>
+      		{booleanhistory}
+      		
+      		<b><span className="title ">{this.props.comicName}</span></b>
+      		<p>Chapter {this.props.comicChap}</p>
           <div className="card-action">
                             <a href={url}>Read now </a>
                         </div>
-          <a href="#!" class="secondary-content btn-floating halfway-fab waves-effect waves-light red" onClick={e => this.handleClick_deleteHistory(e)}>
-            <i class=" center material-icons">close</i>
-          </a>
-      </li>
+      		<a href="#!" className="secondary-content btn-floating halfway-fab waves-effect waves-light red" onClick={e => this.handleClick_deleteHistory(e)}>
+      			<i className="material-icons">close</i>
+      		</a>
+    	</li>
+			</div>
   );
   }
 }

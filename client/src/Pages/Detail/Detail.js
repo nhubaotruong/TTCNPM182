@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./Detail.css";
 import ComicDetail from './ComicDetail';
 import axios from 'axios';
+import LazyLoad from 'react-lazyload';
 
 
 export default class Detail extends Component {
@@ -19,9 +20,9 @@ export default class Detail extends Component {
     }
 
     componentWillMount() {
-        var username = ""
+        var username = "";
         if(JSON.parse(localStorage.getItem("User"))!=null){
-            username = JSON.parse(localStorage.getItem("User")).username
+            username = JSON.parse(localStorage.getItem("User")).username;
         }
         
         
@@ -79,7 +80,7 @@ export default class Detail extends Component {
         axios
             .post('/comics/deleteFavouriteList', {id : this.props.comic._id , username : this.state.username})
             .then(res =>{
-                if (res.data == true)
+                if (res.data === true)
                 {
                     this.setState({
                         checkadd : true
@@ -113,8 +114,12 @@ export default class Detail extends Component {
                     </thead>
                     <tbody>
                         <tr className="row">
-                            <td className="col m4"><img id="comicPic" src={this.props.comic.avatar} alt="comicPic" /></td>
-                            <td className="col m8">
+                            <td className="col m5">
+                                <LazyLoad width={300}>
+                                    <img id="comicPic" src={this.props.comic.avatar} alt="comicPic" />
+                                    </LazyLoad>
+                            </td>
+                            <td className="col m7">
                                 <table className="striped">
                                 <tr><ComicDetail idComic={this.props.comic._id} 
                                              author={this.props.comic.author} artist={this.props.comic.artist} 
@@ -122,15 +127,13 @@ export default class Detail extends Component {
                                              publisher={this.props.comic.company}
                                              status="Chưa rõ"/>
                                 </tr>
-                                { this.state.username != "" ?
                                 <tr>
 
-                                    <a className="btn btn-large grey darken-3 white-text waves-effect waves-light" 
+                                    {(this.state.username!=="") ? <button className="btn btn-large grey darken-3 white-text waves-effect waves-light" 
                                         onClick = {this.state.checkadd ? this.addFavourite : this.removeFacourite}>
                                         {this.state.checkadd ? "Thêm vào yêu thích" : "Bỏ yêu thích"}
-                                    </a>
+                                    </button> : ""}
                                 </tr>
-                                : ""}
                                 </table>
                             </td>
                         </tr>

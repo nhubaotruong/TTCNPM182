@@ -5,8 +5,6 @@ import ComicBox from './ReadComic/ComicBox';
 import ComicNav from './ReadComic/ComicNav';
 import SumComment from '../Pages/Comment/SumComment';
 import axios from 'axios';
-import Time from 'react-time';
-
 
 
 export default class readcomic extends Component
@@ -124,7 +122,7 @@ export default class readcomic extends Component
     render() {
         return (
             <div>
-                <div className="container" style={{width:"80%"}}>
+                <div className="container">
                 <Header />
                 <br />
                 <ComicNav 

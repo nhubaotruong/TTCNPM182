@@ -28,7 +28,7 @@ export default class CommentForm extends Component {
 
 
   componentDidMount(){
-    if(JSON.parse(localStorage.getItem("User")) != null){
+    if(JSON.parse(localStorage.getItem("User")) !== null){
       this.setState({username: JSON.parse(localStorage.getItem("User")).username})
     }
     this.setState({reply_:{replyto: this.props.replyTo}})
@@ -40,9 +40,9 @@ export default class CommentForm extends Component {
     const { value, name } = event.target;
     var date = new Date();
     var dates = date.toLocaleTimeString() + ' ' + date.toLocaleDateString();
-    if(this.props.type_ ==="Comment"){
+    if(this.props.type_ ==="Bình luận"){
       console.log("comment")
-      if(this.state.username != ""){
+      if(this.state.username !== ""){
         this.setState({
           ...this.state,
           comment: {
@@ -65,9 +65,9 @@ export default class CommentForm extends Component {
         });
       }
     }
-    if(this.props.type_ === "Reply"){
+    if(this.props.type_ === "Trả lời"){
       console.log("reply")
-      if(this.state.username != ""){
+      if(this.state.username !== ""){
         this.setState({
           ...this.state,
           reply_: {
@@ -111,7 +111,7 @@ export default class CommentForm extends Component {
     // loading status and clear error
     this.setState({ error: "", loading: true });
     //dành cho comment
-    if (this.props.type_ === "Comment") {
+    if (this.props.type_ === "Bình luận") {
       let { comment } = this.state;
       console.log(comment.message[0])
       axios
@@ -155,7 +155,7 @@ export default class CommentForm extends Component {
         })
     }
     //dành cho reply
-    if(this.props.type_ === "Reply"){
+    if(this.props.type_ === "Trả lời"){
       let { reply_ } = this.state;
       this.props.addComment(reply_)
       this.setState({
@@ -170,7 +170,7 @@ export default class CommentForm extends Component {
   isFormValid() {
     console.log(this.state.comment.name)
     console.log(this.state.comment.message)
-    if(this.props.type_ === "Reply"){
+    if(this.props.type_ === "Trả lời"){
       return (this.state.reply_.name !== "" && this.state.reply_.message !== "");
     }
     return (this.state.comment.name !== "" && this.state.comment.message !== "");
@@ -194,13 +194,13 @@ export default class CommentForm extends Component {
     // if (this.state.rep === false) {
       return (
         <React.Fragment>
-          <form method="post" onSubmit={this.onSubmit} style = {{backgroundColor: "#e1f5fe",border: "2px solid #d4e157",width: "auto", height: "100%",borderRadius: "5px"}}>
+          <form method="post" onSubmit={this.onSubmit} style = {{backgroundColor: "#e1f5fe",border: "2px solid #d4e157",width: "auto", height: "100%",borderRadius: "5px", padding:'0 10px 0 10px'}}>
             {this.state.username == "" ?
             <div className="input-field">
             <i class="material-icons prefix">account_circle</i>
               <input
                 onChange={this.handleFieldChange}
-                value={this.props.type_ === "Comment"? this.state.comment.name : this.state.reply_.name}
+                value={this.props.type_ === "Bình luận"? this.state.comment.name : this.state.reply_.name}
                 className="validate"
                 placeholder="😎 Tên bạn"
                 name="name"
@@ -212,7 +212,7 @@ export default class CommentForm extends Component {
             <i className="material-icons prefix">mode_edit</i>
               <textarea className="materialize-textarea"
                 onChange={this.handleFieldChange}
-                value={this.props.type_ === "Comment"? this.state.comment.message : this.state.reply_.message}
+                value={this.props.type_ === "Bình luận"? this.state.comment.message : this.state.reply_.message}
                 placeholder="🤬 Lời bình luận"
                 name="message"
                 rows="5"
@@ -221,11 +221,11 @@ export default class CommentForm extends Component {
             {this.props.replyTo ? (<p className="blue-text">Bạn sẽ trả lời cho @{this.props.replyTo}</p>) : ""}
             {this.renderError()}
 
-            <div className="input-field">
+            <div className="input-field" style={{paddingLeft:'10px'}}>
               {/* <button disabled={this.state.loading} className="btn btn-primary">
                 Comment &#10148;
               </button> */}
-              <button disabled={this.state.loading} className="btn waves-effect waves-light blue" type="submit" name="action">{this.props.type_}&#10148;
+              <button disabled={this.state.loading} className="btn waves-effect waves-light blue" type="submit" name="action">{this.props.type_} &#10148;
               </button>
             </div>
           </form>

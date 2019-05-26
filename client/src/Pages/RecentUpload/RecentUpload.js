@@ -14,7 +14,7 @@ const recentUpload = (props) => {
                             <p style={{textAlign:'justify'}}>{props.comicDes}</p>
                         </div>
                         <div className="card-action right-align">
-                            <a href={url}>Read more...</a>
+                            <b><a href={url} className="cyan-text text-darken-4">Đọc thêm ...</a></b>
                         </div>
                     </div>
                 </div>

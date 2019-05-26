@@ -100,9 +100,9 @@ class Storybroad extends Component
 
     
     showFavouritecomics = () => {
-        if(this.state.Favouritecomics.length == 0)
+        if(this.state.Favouritecomics.length === 0)
         {
-            return <div>Danh sách ưu thích trống</div>
+            return <div>Danh sách yêu thích trống</div>
         }
         else{
 
@@ -118,7 +118,7 @@ class Storybroad extends Component
     )}}
     showHistorycomics = () => {
 
-        if(this.state.Historycomics.length == 0){
+        if(this.state.Historycomics.length === 0){
             return <div>Không có lịch sử</div>
         }
         else {
@@ -146,10 +146,10 @@ class Storybroad extends Component
                 <div class="col s12 16">
                     <ul class="tabs">
                         <li class="tab col s6" >
-                            <a href="#Favourite" class="waves-effect waves-red black-text" >Favourite List</a>
+                            <a href="#Favourite" class="waves-effect waves-red black-text" >Danh sách yêu thích</a>
                         </li>
                         <li class="tab col s6">
-                            <a href="#History" class="waves-effect waves-red black-text" >History</a>
+                            <a href="#History" class="waves-effect waves-red black-text" >Lịch sử đọc truyện</a>
                         </li>
                         
                     </ul>
