@@ -1,11 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Dashboard.scss';
 import Info from './Info';
 import Add_Update from './Add_Update';
 import Delete from './Delete';
 import Breadcrumbs from '../Basic/Breadcrumbs';
 
-const dashboard = () => {
+class dashboard extends Component {
+
+
+
+    constructor(props) {
+        super(props);
+
+        
+    }
+
+
+
+    componentWillMount(){
+
+        if (localStorage.getItem("User"))
+        {
+            this.setState({
+                username : JSON.parse(localStorage.getItem("User")).username
+            })
+            if (!JSON.parse(localStorage.getItem("User")).admin)
+            {
+                alert("Bạn phải là admin mới có thể sử dụng chức năng này")
+                window.location = "/home"
+            }
+        }
+        else {
+            alert("Bạn cần đăng nhập để sử dụng chức năng này")
+            window.location = "/home"
+        }
+    }
+
+
+
+
+    render(){
     return(
         <div className="container">
             <nav className="grey darken-3">
@@ -61,6 +95,7 @@ const dashboard = () => {
             
     </div> 
     );
+    }
 }
 
 export default dashboard;
