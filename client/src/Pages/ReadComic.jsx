@@ -34,12 +34,18 @@ export default class readcomic extends Component
         var chapterNum = url.slice(index1+1,index_temp);
         var comicName = url.slice(index2+1,url.length);
 
-        var username = JSON.parse(localStorage.getItem("User")).username
+        var username = "";
+        if (localStorage.getItem("User"))
+        {
+
+            username = JSON.parse(localStorage.getItem("User")).username
+        }
         this.setState({
             comicName : comicName,
             chapterNum : chapterNum,
             username : username
         })
+
         axios
             .post('/comics/readcomic',{comicName : comicName, chapter : chapterNum})
             .then(res => {
